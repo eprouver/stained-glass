@@ -1,0 +1,36 @@
+<div id="high">
+  <div id="holder">
+    <div id="central">
+      <div class="div1 inner">🌧️</div>
+      <div class="div2 inner">🌧️</div>
+      <div class="div3 inner">🌧️</div>
+      <div class="div4 inner">🌧️</div>
+    </div>
+  </div>
+
+  <div id="wall">
+    <div id="holder1" class="b-hold">
+    </div>
+    <div id="holder2" class="b-hold">
+    </div>
+    <div id="holder3" class="b-hold">
+    </div>
+  </div>
+</div>
+
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="400" height="704" viewBox="0 0 300 528">
+  <filter id="light">
+    <!--Blur effect-->
+
+    <!--Lighting effect-->
+    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#aa9">
+      <!--Light source effect-->
+      <fePointLight x="120" y="40" z="100">
+        <animate attributeName="x" values="40;200;40" dur="14s" repeatCount="999" />
+        <fePointLight />
+
+    </feSpecularLighting>
+    <!--Composition of inputs-->
+    <feComposite in="SourceGraphic" in2="spec4" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+  </filter>
+</svg>
