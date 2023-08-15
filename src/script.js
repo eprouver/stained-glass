@@ -1,74 +1,3 @@
-const emojis = [
-  "🐕",
-  "🐈",
-  "🐁",
-  "🐇",
-  "🦊",
-  "🐻",
-  "🐴",
-  "🦁",
-  "🏰",
-  "🏹",
-  "🌾",
-  "🌷",
-  "⚔️",
-  "📜",
-  "👑",
-  "🦄",
-  "👼🏼",
-  "🍄",
-  "🦔",
-  "🌹",
-  "🌻",
-  "🌼",
-  "🌱",
-  "🌿",
-  "☘️",
-  "🍀",
-  "🌰",
-  "🌲",
-  "⚜️",
-  "🐍",
-  "🕊️",
-  "🦉",
-  "🦢",
-  "🍓",
-  "🍷",
-  "🍇",
-  "🍎",
-  "🍞",
-  "🗝️",
-  "🌙",
-  "🦗",
-  "🔱",
-  "🐸",
-  "🦚",
-  "🐔",
-  "💀",
-  "🦇",
-  "🌈",
-  "💐",
-  "🐖",
-  "🎀",
-  "🤝🏻",
-  "🥀",
-  "🙏🏼",
-  "🖤",
-  "❤️",
-  "🐌",
-  "🦨",
-  "🐢",
-  "👁️",
-  "💎",
-  "⚱️",
-  "💪🏽",
-  "🔥",
-  "☄️",
-  "✊🏼",
-  "🩸",
-  "☀️"
-];
-
 /* https://medialab.github.io/iwanthue/ */
 
 let c, ctx;
@@ -84,7 +13,7 @@ const colors = [
   "#49c0ff",
   "#0091bb",
   "#76a3ff",
-  "#019ce5"
+  "#019ce5",
 ];
 
 function main(holder) {
@@ -96,6 +25,7 @@ function main(holder) {
 
   bord.classList.add("bord");
   c = document.createElement("canvas");
+  c.classList.add("glass");
   c.width = size;
   c.height = size;
   ctx = c.getContext("2d");
@@ -119,7 +49,6 @@ function main(holder) {
     }
   }
 
-  // Generation code end
   draw();
   bord.appendChild(c);
   bord.appendChild(crest);
@@ -147,27 +76,53 @@ function draw() {
   }
 }
 
-for (let i = 1; i < 4; i++) {
-  const holdme = document.getElementById(`holder${i}`);
-  main(holdme);
-  main(holdme);
-  main(holdme);
-}
+setTimeout(() => {
+  for (let i = 1; i < 4; i++) {
+    const holdme = document.getElementById(`holder${i}`);
+    main(holdme);
+    main(holdme);
+    main(holdme);
+  }
 
-const holder = document.getElementById("holder");
+  function cloneCanvas(oldCanvas) {
+    //create a new canvas
+    var newCanvas = document.createElement("canvas");
+    var context = newCanvas.getContext("2d");
 
-emojis.slice(0,10).forEach((month, i) => {
-  if (i == 1) return;
-  const div = document.createElement("div");
-  const size = "188px";
-  div.classList.add("circle");
-  div.style.transform = `translate(
-    calc(cos(${ 55 + 36 * i}deg) * ${size}), 
-    calc(sin(${ 55 + 36 * i}deg) * ${size})
+    //set dimensions
+    newCanvas.width = oldCanvas.width;
+    newCanvas.height = oldCanvas.height;
+
+    //apply the old canvas to the new one
+    context.drawImage(oldCanvas, 0, 0);
+
+    //return the new canvas
+    return newCanvas;
+  }
+
+  /* Rosetta window */
+  const holder = document.getElementById("holder");
+  const panes = document.getElementsByClassName("glass");
+  const central = document.getElementById("central");
+  central.style.backgroundImage = `url(${panes[6].toDataURL()})`;
+  central.style.backgroundSize = "cover";
+
+  emojis.slice(0, 10).forEach((month, i) => {
+    if (i == 1) return;
+    const div = document.createElement("div");
+    const size = "188px";
+    div.classList.add("circle");
+    div.style.transform = `translate(
+    calc(cos(${55 + 36 * i}deg) * ${size}), 
+    calc(sin(${55 + 36 * i}deg) * ${size})
   )`;
-  div.style.backgroundColor = colors[~~(Math.random() * colors.length)]
 
-  div.innerText = month;
+    div.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
+    div.style.backgroundSize = "cover";
+    const text = document.createElement("span");
+    text.innerText = month;
+    div.appendChild(text);
 
-  holder.appendChild(div);
-});
+    holder.appendChild(div);
+  });
+}, 0);

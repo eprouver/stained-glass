@@ -1,0 +1,47 @@
+.tiny {
+  font-size: 0.3em;
+}
+
+#match-hold {
+  padding: 3vmin;
+  font-size: 36vmin;
+  width: 70vw;
+  line-height: 40vmin;
+  border: 10px solid #ccc;
+  border-radius: 5vmin;
+  margin: 17vmin auto;
+  background: #eee;
+  display: flex;
+  justify-content: space-around;
+}
+
+.rand {
+  position: relative;
+  text-shadow: 0 0 20px black, 0 0 10px black;
+  width: 2em;
+  filter: grayscale(0.4) contrast(0.7);
+}
+
+.backing {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.backing:before {
+  position: absolute;
+  content: "🛡️";
+  filter: grayscale(1) contrast(0.6);
+  pointer-events: none;
+  transform: scale(2.1);
+  transform-origin: 50% 0.25em;
+  line-height: 0.95em;
+}
+
+#s-match {
+  font-size: 4vmin;
+  padding: 0.5em 2em;
+  margin: 1em;
+  border-radius: 0.4em;
+}
