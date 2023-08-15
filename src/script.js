@@ -1,7 +1,7 @@
 /* https://medialab.github.io/iwanthue/ */
 
 let c, ctx;
-const size = 400;
+const size = 200;
 const complexity = 50;
 const colors = [
   "#0288db",
@@ -19,9 +19,38 @@ const colors = [
 function main(holder) {
   const bord = document.createElement("div");
   const crest = document.createElement("div");
+  const cover = document.createElement("div");
+  cover.classList.add("cover");
   crest.classList.add("crest");
+  bord.onclick = () => {
+    bord.classList.toggle("open");
+    zzfx(
+      ...[
+        ,
+        0,
+        100,
+        0.14,
+        0.5,
+        0.41,
+        ,
+        15,
+        ,
+        ,
+        20,
+        0.25,
+        0.19,
+        ,
+        ,
+        ,
+        ,
+        0.52,
+        0.23,
+        0.4,
+      ]
+    );
+  };
 
-  crest.innerText = emojis[~~(Math.random() * emojis.length)];
+  crest.innerText = emojis[~~(m.random() * emojis.length)];
 
   bord.classList.add("bord");
   c = document.createElement("canvas");
@@ -37,7 +66,7 @@ function main(holder) {
     w[f] = [];
   }
   for (let i = 0; i < (l = complexity); i++) {
-    p.push([~~((r = (m = Math).random)() * s), ~~(r() * s), ~~(r() * size)]);
+    p.push([~~((r = m.random)() * s), ~~(r() * s), ~~(r() * size)]);
   }
 
   for (let x = 0; x < s; x++) {
@@ -52,6 +81,7 @@ function main(holder) {
   draw();
   bord.appendChild(c);
   bord.appendChild(crest);
+  bord.appendChild(cover);
   holder.appendChild(bord);
 }
 

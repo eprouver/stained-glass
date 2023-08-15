@@ -1,7 +1,8 @@
 const len = 0.5;
-const musicVolume = 0.04;
+const musicVolume = 0.03;
 let playing = false;
 let contexts = [];
+let interval;
 
 const P = (D, index) => {
   contexts[index] = new AudioContext();
@@ -26,12 +27,14 @@ const P = (D, index) => {
                 0.02
               ),
               (type = "triangle"), //sine or triangle or square or sawtooth
+              gain.setTargetAtTime(0.01, i * I + 0.2, 0.01),
               gain.setValueAtTime(musicVolume + 0.008, i * I + 0.3),
               gain.setTargetAtTime(
-                (Math.random() + 0.004) * musicVolume,
+                (m.random() + 0.004) * musicVolume,
                 i * I + 0.3 + 0.1,
                 0.05
               ),
+              gain.setTargetAtTime(0.001, i * I + 0.3 + I, 0.05),
               stop(i * I + 0.3 + I - 0.01);
 
   setTimeout(() => {
@@ -50,12 +53,12 @@ const songs = [
 ];
 
 const playMusic = (delay) => {
-  const song = songs[~~(Math.random() * songs.length)];
+  const song = songs[~~(m.random() * songs.length)];
   contexts = [null, null];
   P(song, 0);
   setTimeout(() => {
     P(song, 1);
-  }, delay || 500);
+  }, delay || 0);
 };
 
 const toggleMusic = () => {
@@ -67,16 +70,19 @@ const toggleMusic = () => {
     }
   });
   contexts = [];
+  if (interval) {
+    clearInterval(interval);
+  }
   if (!playing) {
     return;
   }
 
   playMusic();
-  setInterval(() => {
+  interval = setInterval(() => {
     if (!playing) {
       return;
     }
-    const delay = ~~(Math.random() * 8) * 250;
+    const delay = ~~(m.random() * 8) * 250;
     console.log(delay);
     playMusic(delay);
   }, 30000);

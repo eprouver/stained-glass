@@ -1,5 +1,6 @@
 .tiny {
   font-size: 0.3em;
+  line-height: 1.25em;
 }
 
 #match-hold {
@@ -7,10 +8,10 @@
   font-size: 36vmin;
   width: 70vw;
   line-height: 40vmin;
-  border: 10px solid #ccc;
+  border: 10px solid #615246;
   border-radius: 5vmin;
   margin: 17vmin auto;
-  background: #eee;
+  background: #bbb1a8;
   display: flex;
   justify-content: space-around;
 }

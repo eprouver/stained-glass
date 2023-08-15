@@ -7,57 +7,7 @@ let timer;
 const beepBoop = () => {
   if (!booping || timer > 900) {
     setTimeout(() => {
-      if (randOne.innerText !== randTwo.innerText) {
-        zzfx(
-          ...[
-            1,
-            0,
-            819,
-            ,
-            ,
-            ,
-            1,
-            2,
-            ,
-            ,
-            80,
-            0.05,
-            0.02,
-            ,
-            ,
-            ,
-            0.04,
-            0.84,
-            0.55,
-            0.05,
-          ]
-        );
-      } else {
-        //zzfx(...[2.02,0,700,,,,1,2,,,-80,.12,.02,,,,.04,.84,.76,.05]);
-        zzfx(
-          ...[
-            1.5,
-            0,
-            25.40639,
-            ,
-            0.54,
-            ,
-            2,
-            10,
-            ,
-            ,
-            50,
-            ,
-            ,
-            0.2,
-            ,
-            ,
-            0.17,
-            0.5,
-            0.11,
-          ]
-        ); // Trumpet one
-      }
+      zzfx(...[0.45, 0, 43, , 0.25, 0.25, 2, 22, , , 50, , 0.3, , , , , 0.87]);
     }, 250);
     zzfx(
       ...[
@@ -89,7 +39,7 @@ const beepBoop = () => {
   } else {
     zzfx(
       ...[
-        0.45,
+        0.25,
         0.5,
         430.8128,
         ,
@@ -112,7 +62,7 @@ const beepBoop = () => {
     );
   }
 
-  timer *= Math.max(1.06, timer / (600 * weightedRandomNumber(0.3, 1)));
+  timer *= m.max(1.06, timer / (600 * weightedRandomNumber(0.3, 1)));
   setTimeout(() => {
     const transfer = randOne.innerText + randTwo.innerText;
     while (
@@ -121,15 +71,15 @@ const beepBoop = () => {
       randOne.innerText == "" ||
       randTwo.innerText == ""
     ) {
-      if (Math.random() > 0.5) {
-        randOne.innerText = emojis[~~(Math.random() * emojis.length)];
+      if (m.random() > 0.5) {
+        randOne.innerText = emojis[~~(m.random() * emojis.length)];
       } else {
-        randTwo.innerText = emojis[~~(Math.random() * emojis.length)];
+        randTwo.innerText = emojis[~~(m.random() * emojis.length)];
       }
     }
 
     beepBoop();
-  }, Math.min(700, timer));
+  }, m.min(700, timer));
 };
 
 start.onclick = () => {

@@ -14,14 +14,30 @@
 
   <div id="container">
     <div id="viewport">
-      <div id="start" class="slide" data-x="0" data-y="-100" data-z="1000">
+      <div id="middle" class="slide" data-x="-200" data-y="-1000" data-z="0">
+        <div id="monk">
+        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 323">
+
+            <path id="svg_1" d="M79 130c-65 83-56 148-56 148s-65 44 45 38 79-55 79-55-3-214-68-131z" fill="url(#svg_17)"/>
+            <path id="svg_2" d="M90 73c-65 3-69 61-62 80s97 25 121 6 11-90-18-87 24-2-41 1z" fill="url(#svg_10)"/>
+            <text text-anchor="start" font-size="90" id="svg_3" y="81" x="58">👴🏼</text>
+            <text text-anchor="start" font-size="49" id="svg_4" y="159" x="50">✋🏼</text>
+
+          <defs>
+            <radialGradient r=".5" cy=".3" cx=".6" spreadMethod="pad" id="svg_10">
+              <stop offset="0" stop-color="#704f31"/>
+              <stop offset="1" stop-color="#3f2e1f"/>
+            </radialGradient>
+            <radialGradient cy=".3" cx=".7" spreadMethod="pad" id="svg_17">
+              <stop offset="0" stop-color="#513720"/>
+              <stop offset="1" stop-color="#261f1a"/>
+            </radialGradient>
+          </defs>
+        </svg>
       </div>
-
-
-      <div id="middle" class="slide" data-x="0" data-y="0" data-z="0">
         </div>
 
-<div id="window" class="slide" data-x="0" data-y="-200" data-z="-250">
+<div id="window" class="slide" data-x="0" data-y="-1200" data-z="-300">
 <div id="high">
   <div id="holder">
     <div id="central">
@@ -44,7 +60,7 @@
 
 </div>
 
-<div id="gboard" class="slide" data-x="2000" data-y="-250" data-z="-600">
+<div id="gboard" class="slide" data-x="0" data-y="-3050" data-z="-600">
 
   <div id="s-dialog">
   <div id="match-hold">
@@ -52,7 +68,7 @@
         <span id="rand-one" class="rand"></span>
     </span>
   
-    <span class="tiny">vs.</span>
+    <span class="tiny">Choose<br/>Your<br/>Vassal</span>
     <span class="backing">
         <span id="rand-two" class="rand"></span>
     </span>
@@ -69,21 +85,15 @@
 
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="400" height="704" viewBox="0 0 300 528">
   <filter id="light">
-    <!--Blur effect-->
-
-    <!--Lighting effect-->
-    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#aa9">
-      <!--Light source effect-->
+    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#887">
       <fePointLight x="120" y="40" z="100">
         <animate attributeName="x" values="40;200;40" dur="14s" repeatCount="999" />
         <fePointLight />
-
     </feSpecularLighting>
-    <!--Composition of inputs-->
     <feComposite in="SourceGraphic" in2="spec4" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
   </filter>
 </svg>
-<!-- partial -->
+
 <script  src="./shared.js"></script>
 <script  src="./navigation.js"></script>
 <script  src="./script.js"></script>

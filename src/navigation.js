@@ -1,12 +1,3 @@
-const viewport = document.getElementById("viewport");
-const container = document.getElementById("container");
-
-const config = {
-  height: 1000,
-  width: 1200,
-  base: [0, 0, -2000, 0, 0, 0],
-};
-
 const windowScale = () => {
   const hScale = window.innerHeight / config.height;
   const wScale = window.innerWidth / config.width;
@@ -36,8 +27,10 @@ const reset = () => {
 };
 
 const nextSlide = (ns) => {
+  slides.forEach((slide) => slide.classList.remove("active"));
+  ns.classList.add("active");
   points = Object.values(ns.dataset).map((n) => Number(n));
-  degs = degs.map((p) => randBetween(0, 0));
+  degs = [0, currentIndex * -15, 0];
 
   vals = points.concat(degs);
 
@@ -50,11 +43,14 @@ const nextSlide = (ns) => {
   ns.style = contentTransform(vals);
   viewport.style = viewportTransform(vals);
   currentIndex = (currentIndex + 1) % slideValues.length;
+  //   zzfx(
+  //     ...[0.25, 0, 420, 0.22, 0.5, 0.3, , 19, , , 234, , 0.18, , , , , 0.9, , 0.5]
+  //   );
 };
 
-[...document.getElementsByClassName("slide")].forEach((slide) => {
+slides.forEach((slide, index) => {
   points = Object.values(slide.dataset).map((n) => Number(n));
-  degs = [0, 0, 0];
+  degs = [0, index * -15, 0];
 
   vals = points.concat(degs);
   slide.style = contentTransform(vals);
@@ -62,7 +58,7 @@ const nextSlide = (ns) => {
 
 reset(false);
 
-const slideValues = ["start", "middle", "window", "gboard"]; // Your array of slide values
+const slideValues = ["middle", "gboard", "window"]; // Your array of slide values
 let currentIndex = 0; // Initial index
 
 // Event listener for space bar key press

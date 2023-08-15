@@ -1,5 +1,16 @@
+const viewport = document.getElementById("viewport");
+const container = document.getElementById("container");
+const slides = [...document.getElementsByClassName("slide")];
+
+const config = {
+  height: 1000,
+  width: 1200,
+  base: [0, 2000, 0, 0, 0, 0],
+};
+
+const m = Math;
 const randBetween = (min, max) => {
-  return ~~(Math.random() * (max - min + 1) + min);
+  return ~~(m.random() * (max - min + 1) + min);
 };
 
 const emojis = [
@@ -12,21 +23,17 @@ const emojis = [
   "🐴",
   "🦁",
   "🏰",
-  "🏹",
-  "🌾",
   "🌷",
   "⚔️",
   "📜",
   "👑",
   "🦄",
-  "👼🏼",
   "🍄",
   "🦔",
   "🌹",
   "🌻",
   "🌼",
   "🌱",
-  "🌿",
   "☘️",
   "🍀",
   "🌰",
@@ -56,7 +63,6 @@ const emojis = [
   "🎀",
   "🤝🏻",
   "🥀",
-  "🙏🏼",
   "🖤",
   "❤️",
   "🐌",
@@ -64,13 +70,12 @@ const emojis = [
   "🐢",
   "👁️",
   "💎",
-  "⚱️",
   "💪🏽",
   "🔥",
   "☄️",
   "✊🏼",
-  "🩸",
   "☀️",
+  "🕯️",
 ];
 
 // ZzFXMicro - Zuper Zmall Zound Zynth - v1.2.0 by Frank Force ~ 880 bytes
@@ -168,11 +173,141 @@ zzfxX = new AudioContext();
 
 function weightedRandomNumber(min, max) {
   const lambda = 0.3;
-  const exponent = -lambda * Math.random();
+  const exponent = -lambda * m.random();
   const scaled = ~~(
-    ((Math.pow(Math.E, exponent) - 1) / (Math.pow(Math.E, -lambda) - 1)) *
+    ((m.pow(m.E, exponent) - 1) / (m.pow(m.E, -lambda) - 1)) *
     (max - min + 1)
   );
 
   return min + scaled;
 }
+
+{
+  let e, t, l, r, o, n, f, s, a, i, d, u, _, w, g, h, v, S, c, y, V, b;
+  (n = (o = Object).getPrototypeOf),
+    (f = document),
+    (s = (e, t, l, r) => (e ?? (setTimeout(l, r), new Set())).add(t)),
+    (a = (e, t, r) => {
+      let o = l;
+      l = t;
+      try {
+        return e(r);
+      } catch (e) {
+        return console.error(e), r;
+      } finally {
+        l = o;
+      }
+    }),
+    (i = (e) => (e.t = e.t.filter((e) => e.l?.isConnected))),
+    (u = n(
+      (d = {
+        get val() {
+          return l?.add(this), this.o;
+        },
+        get oldVal() {
+          return l?.add(this), this.i;
+        },
+        set val(e) {
+          let l = this;
+          if (e !== l.o) {
+            l.o = e;
+            let r = new Set();
+            for (let e of [...l.u])
+              v(e.f, e.s), (e.g = 1), e.h.forEach(r.add, r);
+            for (let e of r) e.u = e.u.filter((e) => !e.g);
+            l.t.length ? (t = s(t, l, V)) : (l.i = e);
+          }
+        },
+      })
+    )),
+    (_ = n(a)),
+    (w = (e) => ({ __proto__: d, o: e, i: e, t: [], u: [] })),
+    (g = (e) => n(e ?? 0) === d),
+    (h = (t, l) => {
+      let o = new Set(),
+        n = { f: t },
+        d = a(t, o, l);
+      for (let t of o)
+        (r = s(r, t, () => (r.forEach(i), (r = e)), 1e3)), t.t.push(n);
+      return (n.l = (d ?? f).nodeType ? d : new Text(d));
+    }),
+    (v = (e, t = w()) => {
+      let l = new Set(),
+        r = { f: e, h: l, s: t };
+      t.val = a(e, l);
+      for (let e of l) e.u.push(r);
+      return t;
+    }),
+    (c = {}),
+    (y = (t) =>
+      new Proxy(
+        (l, ...r) => {
+          let [s, ...a] = n(r[0] ?? 0) === u ? r : [{}, ...r],
+            i = t ? f.createElementNS(t, l) : f.createElement(l);
+          for (let [t, r] of o.entries(s)) {
+            let f = (l) =>
+                l ? o.getOwnPropertyDescriptor(l, t) ?? f(n(l)) : e,
+              s = l + "," + t,
+              a = c[s] ?? (c[s] = f(n(i))?.set ?? 0),
+              u = a ? a.bind(i) : i.setAttribute.bind(i, t),
+              w = n(r ?? 0);
+            w === d
+              ? h(() => (u(r.val), i))
+              : w !== _ || (t.startsWith("on") && !r.v)
+              ? u(r)
+              : h(() => (u(r()), i));
+          }
+          return S(i, ...a);
+        },
+        { get: (t, l) => t.bind(e, l) }
+      )),
+    (V = () => {
+      let l = [...t].filter((e) => e.o !== e.i);
+      t = e;
+      for (let t of new Set(l.flatMap(i))) {
+        let l = t.l,
+          r = h(t.f, l);
+        (t.l = e), r !== l && (r != e ? l.replaceWith(r) : l.remove());
+      }
+      for (let e of l) e.i = e.o;
+    }),
+    (b = {
+      add: (S = (t, ...l) => {
+        for (let r of l.flat(1 / 0)) {
+          let l = n(r ?? 0),
+            o = l === d ? h(() => r.val) : l === _ ? h(r) : r;
+          o != e && t.append(o);
+        }
+        return t;
+      }),
+      _: (e) => ((e.v = 1), e),
+      tags: y(),
+      tagsNS: y,
+      state: w,
+      val: (e) => (g(e) ? e.val : e),
+      oldVal: (e) => (g(e) ? e.oldVal : e),
+      derive: v,
+    }),
+    (window.van = b);
+}
+
+const synth = window.speechSynthesis;
+let voice, utterance;
+const speak = (text) => {
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = voice;
+  utterance.volume = 0.4;
+  utterance.rate = 0.8;
+  //   utterance.pitch = 0.8;
+  synth.speak(utterance);
+};
+
+// Wait for the voices to be loaded
+window.speechSynthesis.onvoiceschanged = function () {
+  // Get all available voices
+  const voices = speechSynthesis.getVoices();
+  // Find the British male voice
+  voice = voices.filter((voice) => voice.lang === "en-GB")[0];
+  console.log(voices.filter((voice) => voice.lang === "en-GB"));
+  speak("Ready");
+};
