@@ -1,8 +1,5 @@
 const len = 0.5;
-const musicVolume = 0.03;
-let playing = false;
-let contexts = [];
-let interval;
+const musicVolume = 0.02 * config.volmul;
 
 const P = (D, index) => {
   contexts[index] = new AudioContext();
@@ -61,8 +58,15 @@ const playMusic = (delay) => {
   }, delay || 0);
 };
 
+const toggleSFX = () => {
+  sfx = !sfx;
+  if (!sfx) {
+    if (synth.cancel) synth.cancel();
+  }
+};
+
 const toggleMusic = () => {
-  playing = !playing;
+  music = !music;
 
   contexts.forEach((ac) => {
     if (ac.state == "running") {
@@ -73,13 +77,13 @@ const toggleMusic = () => {
   if (interval) {
     clearInterval(interval);
   }
-  if (!playing) {
+  if (!music) {
     return;
   }
 
   playMusic();
   interval = setInterval(() => {
-    if (!playing) {
+    if (!music) {
       return;
     }
     const delay = ~~(m.random() * 8) * 250;

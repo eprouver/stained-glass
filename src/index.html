@@ -2,19 +2,19 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Stained Glass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Stained Glass</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./match.css">
-  <script  src="./music.js"></script>
 </head>
 <body>
-  <button id="music" onclick="toggleMusic()">
-    Toggle Music
-  </button>
+
+
 
   <div id="container">
     <div id="viewport">
       <div id="middle" class="slide" data-x="-200" data-y="-1000" data-z="0">
+        <button id="war" onclick="nextSlide('gmatch')">To Battle!</button>
         <div id="monk">
         <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 323">
 
@@ -35,9 +35,12 @@
           </defs>
         </svg>
       </div>
-        </div>
+    </div>
 
 <div id="window" class="slide" data-x="0" data-y="-1200" data-z="-300">
+  <div id="chooser" class="help">
+    <h1>Select the panes to glorify your victory!</h1>
+  </div>
 <div id="high">
   <div id="holder">
     <div id="central">
@@ -60,32 +63,53 @@
 
 </div>
 
-<div id="gboard" class="slide" data-x="0" data-y="-3050" data-z="-600">
-
+<div id="gmatch" class="slide" data-x="0" data-y="-3050" data-z="-600">
   <div id="s-dialog">
   <div id="match-hold">
-    <span class="backing">
+    <div class="backing">
         <span id="rand-one" class="rand"></span>
-    </span>
-  
-    <span class="tiny">Choose<br/>Your<br/>Vassal</span>
-    <span class="backing">
+    </div>
+    <div class="tiny">or</div>
+    <div class="backing">
         <span id="rand-two" class="rand"></span>
-    </span>
-  
+    </div>
   </div>
-  
-  <button id="s-match" role="button">Start</button>
+  <button id="s-match" role="button">Find Vassals</button>
 </div>
+
+<div id="gboard" class="slide" data-x="340" data-y="-6270" data-z="-4000">
+  <h1 style="color:white">Board</h1>
+  <div id="b-base"></div>
+</div> 
 
 </div>
 
 </div>
+</div>
+
+<div id="options">
+  <button onclick="toggleSFX()">
+    Toggle SFX
+  </button>
+  <button onclick="toggleMusic()">
+    Toggle Music
+  </button>
+</div>
+
+<div id="start-help" class="help">
+  <h1>⚔️</h1>
+  <h1>Winner's Window</h1>
+  <p>Guide your vassals to victory and complete the whole stained glass window for the monastery.</p>
+  <div>
+    <button id="go" onclick="help.style.display = 'none'; toggleMusic(); nextSlide('middle')" >
+      Let's Go!
+    </button>
+  </div>
 </div>
 
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="400" height="704" viewBox="0 0 300 528">
   <filter id="light">
-    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#887">
+    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#998">
       <fePointLight x="120" y="40" z="100">
         <animate attributeName="x" values="40;200;40" dur="14s" repeatCount="999" />
         <fePointLight />
@@ -95,8 +119,10 @@
 </svg>
 
 <script  src="./shared.js"></script>
+<script  src="./music.js"></script>
 <script  src="./navigation.js"></script>
 <script  src="./script.js"></script>
+<script  src="./game.js"></script>
 <script  src="./match.js"></script>
 
 </body>

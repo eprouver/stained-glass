@@ -146,6 +146,9 @@ setTimeout(() => {
     calc(cos(${55 + 36 * i}deg) * ${size}), 
     calc(sin(${55 + 36 * i}deg) * ${size})
   )`;
+    div.style.filter = `contrast(0.8) brightness(1.2) hue-rotate(${
+      (50 + m.random() * 200) * i * i * (i % 2 == 0 ? 1 : -1)
+    }deg)`;
 
     div.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
     div.style.backgroundSize = "cover";

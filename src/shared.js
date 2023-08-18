@@ -1,12 +1,21 @@
 const viewport = document.getElementById("viewport");
 const container = document.getElementById("container");
 const slides = [...document.getElementsByClassName("slide")];
+const help = document.getElementById("start-help");
+
+/* music vars */
+let contexts = [];
+let interval;
 
 const config = {
-  height: 1000,
   width: 1200,
+  height: 900,
   base: [0, 2000, 0, 0, 0, 0],
+  volmul: 2,
 };
+let music = false;
+let sfx = true;
+let winning = false;
 
 const m = Math;
 const randBetween = (min, max) => {
@@ -46,10 +55,8 @@ const emojis = [
   "🍓",
   "🍷",
   "🍇",
-  "🍎",
   "🍞",
   "🗝️",
-  "🌙",
   "🦗",
   "🔱",
   "🐸",
@@ -58,7 +65,6 @@ const emojis = [
   "💀",
   "🦇",
   "🌈",
-  "💐",
   "🐖",
   "🎀",
   "🤝🏻",
@@ -68,14 +74,13 @@ const emojis = [
   "🐌",
   "🦨",
   "🐢",
-  "👁️",
   "💎",
   "💪🏽",
   "🔥",
   "☄️",
-  "✊🏼",
   "☀️",
   "🕯️",
+  "🥪",
 ];
 
 // ZzFXMicro - Zuper Zmall Zound Zynth - v1.2.0 by Frank Force ~ 880 bytes
@@ -117,6 +122,8 @@ zzfx = // play sound
     x,
     h
   ) => {
+    if (!sfx) return;
+    p *= config.volmul;
     e = R * e + 9;
     m *= R;
     r *= R;
@@ -290,15 +297,18 @@ function weightedRandomNumber(min, max) {
     }),
     (window.van = b);
 }
+const { div } = van.tags;
 
 const synth = window.speechSynthesis;
 let voice, utterance;
-const speak = (text) => {
+
+const speak = (text, volume = 0.4) => {
+  if (!sfx) return;
+  if (synth.cancel) synth.cancel();
   utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = voice;
-  utterance.volume = 0.4;
+  utterance.volume = volume * config.volmul;
   utterance.rate = 0.8;
-  //   utterance.pitch = 0.8;
   synth.speak(utterance);
 };
 
@@ -308,6 +318,149 @@ window.speechSynthesis.onvoiceschanged = function () {
   const voices = speechSynthesis.getVoices();
   // Find the British male voice
   voice = voices.filter((voice) => voice.lang === "en-GB")[0];
-  console.log(voices.filter((voice) => voice.lang === "en-GB"));
-  speak("Ready");
+  document.getElementById("go").removeAttribute("disabled");
+  setTimeout(() => {
+    speak("Ready");
+  });
+};
+
+const win = () => {
+  winning = true;
+  const low = [
+    0.7,
+    0,
+    200,
+    0.1,
+    3,
+    0.2,
+    ,
+    3.5,
+    ,
+    ,
+    ,
+    ,
+    0.02,
+    ,
+    ,
+    ,
+    ,
+    0.72,
+    0.12,
+    0.5,
+  ];
+  music = false;
+  contexts.forEach((ac) => {
+    if (ac.state == "running") {
+      ac.close();
+    }
+  });
+  contexts = [];
+  if (interval) {
+    clearInterval(interval);
+  }
+  war.style.display = "none";
+  document.getElementById("chooser").style.display = "none";
+  holder.style.opacity = "1";
+  zzfx(...low);
+  zzfx(
+    ...[
+      0.7,
+      0,
+      200,
+      0.1,
+      3,
+      0.2,
+      ,
+      3.5,
+      ,
+      ,
+      100,
+      ,
+      0.25,
+      ,
+      ,
+      ,
+      ,
+      0.42,
+      0.12,
+      0.5,
+    ]
+  );
+  zzfx(...[0.7, 0, 400, 0.1, 3, 0.2, , 3.5, , , , , , , , , , 0.72, 0.12, 0.5]);
+
+  setTimeout(() => {
+    nextSlide("middle");
+    document.body.classList.add("winning");
+    speak("We bless you, and your wonderful efforts.");
+    setTimeout(() => {
+      const mPart = ["svg_1", "svg_2", "svg_3", "svg_4"];
+      let mIndex = -1;
+      const monk = document.getElementById("monk");
+      const lyric = 0.3;
+
+      setInterval(() => {
+        mIndex += 1;
+        const part = document.getElementById(mPart[mIndex % mPart.length]);
+        part.style.transform = `translate3d(${
+          Math.random() * 10 - 5
+        }px,0px, 0)`;
+        zzfx(...[0.03, 0, 1501, , 0.12, , , 2, , , , , , , , , , 0, 0.05]);
+      }, 200);
+
+      setInterval(() => {
+        zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
+        [...document.getElementsByClassName("circle")]
+          .concat([...document.getElementsByClassName("bord")])
+          .concat([document.getElementById("central")])
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 4)
+          .forEach(
+            (el) => (el.style.filter = `hue-rotate(${Math.random() * 360}deg)`)
+          );
+
+        monk.style.filter = `hue-rotate(${Math.random() * 20 - 10}deg)`;
+      }, 400);
+
+      setInterval(() => {
+        monk.style.transform = `scale(1.2) translate3d(${
+          Math.random() * 210
+        }%,250px, 0) rotate(${Math.random() > 0.5 ? -3 : 3}deg`;
+      }, 5000);
+      let it = 0;
+      setInterval(() => {
+        it += 1;
+        const random = randomName(emojis[~~(Math.random() * emojis.length)]);
+
+        if (it % 3 == 0) {
+          nextSlide("middle");
+        }
+
+        if (it % 4 == 0) {
+          Math.random() > 0.5
+            ? Math.random() > 0.5
+              ? speak("My lady? My lady lady? wha?", lyric)
+              : speak("My lord? What's up.", lyric)
+            : speak(
+                `My goodness, ${random.split(",")[0]}, a trip to ${random
+                  .split(", of")[1]
+                  .trim()}? ${
+                  Math.random() > 0.5 ? "Never been there!" : "Sounds Lovely!"
+                }`,
+                lyric
+              );
+        } else {
+          speak(
+            [
+              "Hello, ",
+              "Hi there, ",
+              "My dear, ",
+              "Welcome, ",
+              "We bless your efforts, ",
+            ][~~(Math.random() * 5)] + random.split(",")[0],
+            lyric
+          );
+        }
+      }, 10000);
+    }, 5000);
+  }, 5000);
 };

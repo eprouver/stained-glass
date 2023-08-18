@@ -1,13 +1,19 @@
 .tiny {
-  font-size: 0.3em;
-  line-height: 1.25em;
+  font-size: 0.25em;
+  color: #4d433c;
+  position: relative;
+  width: 10em;
+  height: 4em;
+  line-height: 4em;
+  pointer-events: none;
 }
 
-#match-hold {
+#match-hold,
+.help {
   padding: 3vmin;
-  font-size: 36vmin;
-  width: 70vw;
-  line-height: 40vmin;
+  font-size: 300px;
+  width: 770px;
+  line-height: 300px;
   border: 10px solid #615246;
   border-radius: 5vmin;
   margin: 17vmin auto;
@@ -19,7 +25,6 @@
 .rand {
   position: relative;
   text-shadow: 0 0 20px black, 0 0 10px black;
-  width: 2em;
   filter: grayscale(0.4) contrast(0.7);
 }
 
@@ -28,6 +33,13 @@
   text-align: center;
   display: flex;
   justify-content: center;
+  transition: 0.05s ease all;
+  cursor: pointer;
+  width: 0;
+}
+
+.backing:hover {
+  transform: scale(1.1);
 }
 
 .backing:before {
@@ -40,9 +52,24 @@
   line-height: 0.95em;
 }
 
-#s-match {
-  font-size: 4vmin;
+#s-match,
+.help button,
+#war {
+  font-size: 35px;
   padding: 0.5em 2em;
   margin: 1em;
   border-radius: 0.4em;
+  background: #f7eadf;
+  color: #57504c;
+  cursor: pointer;
+  transition: all 1s 1s ease;
+}
+
+#s-match:disabled,
+.help button:disabled {
+  opacity: 0.5;
+}
+
+span#rand-one {
+  transform: scaleX(-1);
 }

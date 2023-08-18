@@ -6,7 +6,6 @@ const windowScale = () => {
 };
 
 window.onresize = windowScale;
-windowScale();
 
 const viewportTransform = (val) => {
   val = val.map((val) => -val);
@@ -19,6 +18,8 @@ const contentTransform = (val) => {
 
 let ns, points, degs, vals, progress;
 
+const warbtn = document.getElementById("war");
+
 const reset = () => {
   ns = null;
   points = [0, 0, 0];
@@ -27,10 +28,19 @@ const reset = () => {
 };
 
 const nextSlide = (ns) => {
+  warbtn.style.opacity = "0";
+  if (ns == "middle" && !winning) {
+    speak("we bless you, and your efforts", 0.7);
+    setTimeout(() => {
+      warbtn.style.opacity = "1";
+    }, 2900);
+  }
+  ns = document.getElementById(ns);
   slides.forEach((slide) => slide.classList.remove("active"));
   ns.classList.add("active");
-  points = Object.values(ns.dataset).map((n) => Number(n));
-  degs = [0, currentIndex * -15, 0];
+
+  (points = [ns.dataset.x || 0, ns.dataset.y || 0, ns.dataset.z || 0]),
+    (degs = [0, currentIndex * -10, 0]);
 
   vals = points.concat(degs);
 
@@ -43,14 +53,11 @@ const nextSlide = (ns) => {
   ns.style = contentTransform(vals);
   viewport.style = viewportTransform(vals);
   currentIndex = (currentIndex + 1) % slideValues.length;
-  //   zzfx(
-  //     ...[0.25, 0, 420, 0.22, 0.5, 0.3, , 19, , , 234, , 0.18, , , , , 0.9, , 0.5]
-  //   );
 };
 
 slides.forEach((slide, index) => {
   points = Object.values(slide.dataset).map((n) => Number(n));
-  degs = [0, index * -15, 0];
+  degs = [0, index * -10, 0];
 
   vals = points.concat(degs);
   slide.style = contentTransform(vals);
@@ -58,7 +65,7 @@ slides.forEach((slide, index) => {
 
 reset(false);
 
-const slideValues = ["middle", "gboard", "window"]; // Your array of slide values
+const slideValues = ["middle", "gmatch", "gboard", "window"]; // Your array of slide values
 let currentIndex = 0; // Initial index
 
 // Event listener for space bar key press
@@ -66,6 +73,6 @@ document.body.addEventListener("keyup", (e) => {
   e.stopPropagation();
   e.preventDefault();
   if (e.key === " ") {
-    nextSlide(document.getElementById(slideValues[currentIndex]));
+    nextSlide(slideValues[currentIndex]);
   }
 });
