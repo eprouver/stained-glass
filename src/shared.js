@@ -343,11 +343,12 @@ window.speechSynthesis.onvoiceschanged = function () {
   const voices = speechSynthesis.getVoices();
   // Find the British male voice
   voice = voices.filter((voice) => voice.lang === "en-GB")[0];
-  document.getElementById("go").removeAttribute("disabled");
   setTimeout(() => {
     speak("Ready");
   });
 };
+
+document.getElementById("go").removeAttribute("disabled");
 
 const win = () => {
   [...document.getElementsByClassName("circle")].forEach((circle, i) => {

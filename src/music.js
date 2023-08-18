@@ -86,8 +86,7 @@ const toggleMusic = () => {
     if (!music) {
       return;
     }
-    const delay = ~~(m.random() * 8) * 250;
-    console.log(delay);
-    playMusic(delay);
+
+    playMusic(~~(m.random() * 8) * 250);
   }, 30000);
 };

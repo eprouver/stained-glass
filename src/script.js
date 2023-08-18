@@ -17,11 +17,10 @@ const colors = [
 ];
 
 function main(holder) {
-  const bord = document.createElement("div");
-  const crest = document.createElement("div");
-  const cover = document.createElement("div");
-  cover.classList.add("cover");
-  crest.classList.add("crest");
+  const bord = div();
+  const crest = div({ class: "crest" });
+  const cover = div({ class: "cover" });
+
   bord.onclick = () => {
     crest.innerText = captured.shift();
     bord.classList.toggle("open");
@@ -59,8 +58,6 @@ function main(holder) {
       nextSlide("middle");
     }
   };
-
-  crest.innerText = emojis[~~(m.random() * emojis.length)];
 
   bord.classList.add("bord");
   c = document.createElement("canvas");
@@ -149,23 +146,23 @@ setTimeout(() => {
 
   emojis.slice(0, 10).forEach((month, i) => {
     if (i == 1) return;
-    const div = document.createElement("div");
+    const hh = div();
     const size = "188px";
-    div.classList.add("circle");
-    div.style.transform = `translate(
+    hh.classList.add("circle");
+    hh.style.transform = `translate(
     calc(cos(${55 + 36 * i}deg) * ${size}), 
     calc(sin(${55 + 36 * i}deg) * ${size})
   )`;
-    div.style.filter = `contrast(0.8) brightness(1.2) hue-rotate(${
+    hh.style.filter = `contrast(0.8) brightness(1.2) hue-rotate(${
       (50 + m.random() * 200) * i * i * (i % 2 == 0 ? 1 : -1)
     }deg)`;
 
-    div.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
-    div.style.backgroundSize = "cover";
-    const text = document.createElement("span");
+    hh.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
+    hh.style.backgroundSize = "cover";
+    const text = div();
     text.innerText = month;
-    div.appendChild(text);
+    hh.appendChild(text);
 
-    holder.appendChild(div);
+    holder.appendChild(hh);
   });
 }, 0);

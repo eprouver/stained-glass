@@ -95,7 +95,7 @@ const gameLoop = (ptoken) => {
         );
         return b;
       })
-      .sort((a, b) => a.dist - b.dist)
+      .sort((a, b) => a.dist - b.dist + Math.random() * 0.3)
       .filter((b) => {
         b.moves = possibles(b.row, b.col).filter((move) => {
           return (
@@ -161,7 +161,9 @@ const gameLoop = (ptoken) => {
       .map((loc) => document.getElementById(`cell-${loc.col}-${loc.row}`))
       .forEach((cell, index) => {
         cell.classList.add("highlight");
-        cell.onclick = () => {
+        cell.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           const move = pmoves[index];
           const loc = cell.id
             .split("-")
@@ -175,8 +177,6 @@ const gameLoop = (ptoken) => {
           [...document.getElementsByClassName("highlight")].forEach((c) => {
             c.classList.remove("highlight");
             c.onclick = null;
-            turn();
-            return;
           });
 
           // check if the move was a capture
@@ -229,7 +229,9 @@ const gameLoop = (ptoken) => {
       .slice(1)
       .map((n) => Number(n));
     cell.classList.add("highlight");
-    cell.onclick = () => {
+    cell.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       player.classList.remove("hidden");
       player.style.transform = `translate3d(${loc[1] * cSize}px,${
         loc[0] * cSize
