@@ -7,7 +7,11 @@ const gameLoop = (ptoken) => {
   const base = document.getElementById("b-base");
   base.innerHTML = "";
 
-  const bmoj = emojis.sort(() => Math.random() - 0.5).slice(0, 5);
+  let bmoj = [ptoken];
+
+  while (bmoj.indexOf(ptoken) !== -1) {
+    bmoj = emojis.sort(() => Math.random() - 0.5).slice(0, 5);
+  }
 
   const Board = () => {
     return [...new Array(size)]
@@ -188,8 +192,12 @@ const gameLoop = (ptoken) => {
             baddie.classList.add("dead");
             [...baddie.children].forEach((zer) => {
               zer.style.transform = `translate3d(${
-                Math.random() * 600 - 300
-              }px, ${Math.random() * 600 - 300}px, ${Math.random() * 100}px)`;
+                Math.random() * 1400 - 700
+              }px, ${Math.random() * 1400 - 700}px, ${
+                Math.random() * 100
+              }px) rotate3d(${Math.random()},${Math.random()},${Math.random()},${
+                Math.random() * 360
+              }deg) scale(0.5)`;
               zer.style.filter = "contrast(0) brightness(10)";
               zer.style.opacity = "0";
             });
@@ -207,12 +215,44 @@ const gameLoop = (ptoken) => {
 
           // check if wining
           if (captured.length < 3) {
-            setTimeout(turn, 300);
+            setTimeout(turn, 600);
           } else {
             document.getElementById("panes").innerHTML = captured.join(" ");
+            zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
+
+            setTimeout(() => {
+              zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
+              zzfx(
+                ...[
+                  0.7,
+                  0,
+                  662,
+                  0.17,
+                  1.2,
+                  0.2,
+                  ,
+                  ,
+                  0.25,
+                  ,
+                  420,
+                  0.5,
+                  0.25,
+                  ,
+                  ,
+                  ,
+                  0.03,
+                  0.86,
+                  0.1,
+                  1,
+                ]
+              );
+              [...document.getElementsByClassName("baddy")]
+                .concat([...document.getElementsByClassName("cell")])
+                .forEach((c) => (c.style.transform = "rotate(45deg) scale(0)"));
+            }, 500);
             setTimeout(() => {
               nextSlide("window");
-            }, 300);
+            }, 1800);
           }
         };
       });

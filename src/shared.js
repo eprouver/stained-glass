@@ -343,9 +343,6 @@ window.speechSynthesis.onvoiceschanged = function () {
   const voices = speechSynthesis.getVoices();
   // Find the British male voice
   voice = voices.filter((voice) => voice.lang === "en-GB")[0];
-  setTimeout(() => {
-    speak("Ready");
-  });
 };
 
 document.getElementById("go").removeAttribute("disabled");
@@ -379,7 +376,7 @@ const win = () => {
   ];
   music = false;
   contexts.forEach((ac) => {
-    if (ac.state == "running") {
+    if (ac && ac.state == "running") {
       ac.close();
     }
   });

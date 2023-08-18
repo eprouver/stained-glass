@@ -153,9 +153,7 @@ setTimeout(() => {
     calc(cos(${55 + 36 * i}deg) * ${size}), 
     calc(sin(${55 + 36 * i}deg) * ${size})
   )`;
-    hh.style.filter = `contrast(0.8) brightness(1.2) hue-rotate(${
-      (50 + m.random() * 200) * i * i * (i % 2 == 0 ? 1 : -1)
-    }deg)`;
+    hh.style.filter = `contrast(0.8) brightness(1.2)`;
 
     hh.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
     hh.style.backgroundSize = "cover";
