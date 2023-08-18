@@ -60,14 +60,14 @@ h1 {
   height: 900px;
   transition: all 1000ms ease-in-out 0ms;
   pointer-events: none;
+  opacity: 0;
 }
 .slide.active {
   pointer-events: all;
-}
-
-#middle {
   opacity: 1;
-  transition: opacity 1s ease;
+}
+#window {
+  opacity: 1;
 }
 
 .winning #middle:before {
@@ -99,6 +99,7 @@ h1 {
   flex-direction: column;
   justify-content: end;
   top: -52px;
+  transform: scale(0.92);
 }
 .bord.open,
 #central {
@@ -255,10 +256,6 @@ div#central {
   text-shadow: 0 0 5px black;
 }
 
-#middle:not(.active) {
-  opacity: 0;
-}
-
 .winning #monk {
   transform: translateY(250px) scale(1.2);
 }
@@ -294,18 +291,23 @@ div.help {
 }
 
 :root {
-  --cSize: 100px;
+  --cSize: 130px;
 }
-
+#gboard {
+  pointer-events: none;
+}
 #b-base {
   position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   width: calc(var(--cSize) * 5);
-  box-shadow: 0 0 0 5px black;
+  box-shadow: 0 40px 10px -20px #373737;
+  border-radius: 15px;
   background: #aaa;
-  margin-top: 20px;
+  transform: translateZ(-500px) scale(2) rotateX(37deg);
+  transform-style: preserve-3d;
+  pointer-events: all;
 }
 
 .row {
@@ -318,32 +320,60 @@ div.help {
   display: inline-block;
   transform: rotate(45deg) scale(0.75);
   background: #ccc;
-  box-shadow: 0 0 0 2px black;
+  box-shadow: 0 0 2px black;
   border-radius: 15px;
 }
 
 .cell.highlight {
   background: #ffa;
   cursor: pointer;
-  z-index: 1;
 }
 
 .baddy,
 .player {
   position: absolute;
-  font-size: 50px;
+  font-size: calc(var(--cSize) - 40px);
   width: var(--cSize);
   height: var(--cSize);
   text-align: center;
   line-height: var(--cSize);
-  z-index: 2;
+  top: -8px;
+  left: -5px;
 }
 .baddy,
 .player,
 .cell {
   transition: 0.2s ease all;
+  transform-style: preserve-3d;
 }
 
 .hidden {
+  display: none;
+}
+
+.zer {
+  position: absolute;
+  text-shadow: 0 0.02em 0.05em rgba(0, 0, 0, 0.5);
+  width: 100%;
+  pointer-events: none;
+  transition: 0.5s ease all;
+}
+
+.baddy:before,
+.player:before {
+  content: attr(emoji);
+  opacity: 0.5;
+  height: 1.45em;
+  width: 1.45em;
+  position: absolute;
+  display: block;
+  top: 0.11em;
+  left: 0em;
+  filter: grayscale(0.2) brightness(0.2) blur(0.04em);
+  transform: rotate(45deg);
+}
+
+.baddy.dead:before {
+  content: "";
   display: none;
 }

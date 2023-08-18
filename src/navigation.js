@@ -16,16 +16,13 @@ const contentTransform = (val) => {
   return `transform: translate(-50%, -50%) translate3d(${val[0]}px, ${val[1]}px, ${val[2]}px) rotateX(${val[3]}deg) rotateY(${val[4]}deg) rotateZ(${val[5]}deg);`;
 };
 
-let ns, points, degs, vals, progress;
+let ns, points, degs, vals;
+ns = null;
+points = [0, 0, 0];
+degs = [0, 0, 0];
+viewport.style = viewportTransform(config.base);
 
 const warbtn = document.getElementById("war");
-
-const reset = () => {
-  ns = null;
-  points = [0, 0, 0];
-  degs = [0, 0, 0];
-  viewport.style = viewportTransform(config.base);
-};
 
 const nextSlide = (ns) => {
   warbtn.style.opacity = "0";
@@ -63,9 +60,9 @@ slides.forEach((slide, index) => {
   slide.style = contentTransform(vals);
 });
 
-reset(false);
-
 const slideValues = ["middle", "gmatch", "gboard", "window"]; // Your array of slide values
+
+/* Helpers */
 let currentIndex = 0; // Initial index
 
 // Event listener for space bar key press

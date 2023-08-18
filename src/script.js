@@ -23,7 +23,9 @@ function main(holder) {
   cover.classList.add("cover");
   crest.classList.add("crest");
   bord.onclick = () => {
+    crest.innerText = captured.shift();
     bord.classList.toggle("open");
+    document.getElementById("panes").innerHTML = captured.join(" ");
     zzfx(
       ...[
         ,
@@ -48,6 +50,14 @@ function main(holder) {
         0.4,
       ]
     );
+
+    if (captured.length == 0) {
+      if (document.getElementsByClassName("open").length == 9) {
+        setTimeout(win, 1000);
+        return;
+      }
+      nextSlide("middle");
+    }
   };
 
   crest.innerText = emojis[~~(m.random() * emojis.length)];

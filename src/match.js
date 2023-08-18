@@ -74,7 +74,7 @@ let timer;
 const beepBoop = () => {
   if (!booping || timer > 900) {
     setTimeout(() => {
-      zzfx(...[0.45, 0, 43, , 0.25, 0.25, 2, 22, , , 50, , 0.3, , , , , 0.87]);
+      zzfx(...trumpet);
 
       const name1 = randomName(randOne.innerText);
       randOne.onclick = () => {
@@ -82,6 +82,7 @@ const beepBoop = () => {
         speak(name1);
         nextSlide("gboard");
         clearMatch();
+        gameLoop(randOne.innerText);
       };
       const name2 = randomName(randTwo.innerText);
       randTwo.onclick = () => {
@@ -89,33 +90,12 @@ const beepBoop = () => {
         speak(name2);
         nextSlide("gboard");
         clearMatch();
+        gameLoop(randTwo.innerText);
       };
 
       speak(`Choose Your Vassal, , , , ${name1}, , or ${name2}`);
     }, 250);
-    zzfx(
-      ...[
-        0.75,
-        0,
-        730.8128,
-        ,
-        0.03,
-        0.07,
-        1,
-        1.21,
-        ,
-        ,
-        ,
-        ,
-        ,
-        ,
-        ,
-        ,
-        ,
-        0.47,
-        0.07,
-      ]
-    );
+    zzfx(...dink);
 
     booping = false;
     gmatch.style.pointerEvents = "auto";

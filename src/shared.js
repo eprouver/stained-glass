@@ -2,6 +2,8 @@ const viewport = document.getElementById("viewport");
 const container = document.getElementById("container");
 const slides = [...document.getElementsByClassName("slide")];
 const help = document.getElementById("start-help");
+const captured = [];
+let vassals = [];
 
 /* music vars */
 let contexts = [];
@@ -9,7 +11,7 @@ let interval;
 
 const config = {
   width: 1200,
-  height: 900,
+  height: 910,
   base: [0, 2000, 0, 0, 0, 0],
   volmul: 2,
 };
@@ -21,6 +23,29 @@ const m = Math;
 const randBetween = (min, max) => {
   return ~~(m.random() * (max - min + 1) + min);
 };
+
+const dink = [
+  0.75,
+  0,
+  730.8128,
+  ,
+  0.03,
+  0.07,
+  1,
+  1.21,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  0.47,
+  0.07,
+];
+const trumpet = [0.45, 0, 43, , 0.25, 0.25, 2, 22, , , 50, , 0.3, , , , , 0.87];
 
 const emojis = [
   "🐕",
@@ -325,6 +350,9 @@ window.speechSynthesis.onvoiceschanged = function () {
 };
 
 const win = () => {
+  [...document.getElementsByClassName("circle")].forEach((circle, i) => {
+    circle.innerText = vassals[i % vassals.length];
+  });
   winning = true;
   const low = [
     0.7,

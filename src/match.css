@@ -63,10 +63,11 @@
   color: #57504c;
   cursor: pointer;
   transition: all 1s 1s ease;
+  border: none;
 }
 
 #s-match:disabled,
-.help button:disabled {
+button:disabled {
   opacity: 0.5;
 }
 

@@ -39,7 +39,8 @@
 
 <div id="window" class="slide" data-x="0" data-y="-1200" data-z="-300">
   <div id="chooser" class="help">
-    <h1>Select the panes to glorify your victory!</h1>
+    <h2>Select the panes to glorify your victory!</h2>
+    <h1 id="panes"></h1>
   </div>
 <div id="high">
   <div id="holder">
@@ -78,7 +79,7 @@
 </div>
 
 <div id="gboard" class="slide" data-x="340" data-y="-6270" data-z="-4000">
-  <h1 style="color:white">Board</h1>
+  <h2 style="color:white">Place your Vassal. Capture 3 pieces to win.</h2>
   <div id="b-base"></div>
 </div> 
 
@@ -101,7 +102,7 @@
   <h1>Winner's Window</h1>
   <p>Guide your vassals to victory and complete the whole stained glass window for the monastery.</p>
   <div>
-    <button id="go" onclick="help.style.display = 'none'; toggleMusic(); nextSlide('middle')" >
+    <button id="go" onclick="help.style.display = 'none'; toggleMusic(); nextSlide('middle')" disabled >
       Let's Go!
     </button>
   </div>

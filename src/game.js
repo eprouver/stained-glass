@@ -1,26 +1,28 @@
-const gameLoop = () => {
+const gameLoop = (ptoken) => {
+  vassals.push(ptoken);
   const size = 5;
-  const cSize = 100;
+  const cSize = 130;
   let baddies = [];
-  const ptoken = "🦊";
+
   const base = document.getElementById("b-base");
   base.innerHTML = "";
 
-  const mboard = [...new Array(size)].map((row) => [...new Array(size)]);
-  const bmoj = ["🌹", "🌻", "🌼", "🌱", "🌿"];
+  const bmoj = emojis.sort(() => Math.random() - 0.5).slice(0, 5);
 
   const Board = () => {
-    return mboard.map((row, i) =>
-      div(
-        { class: "row" },
-        row.map((cell, j) =>
-          div({
-            id: `cell-${i}-${j}`,
-            class: "cell",
-          })
+    return [...new Array(size)]
+      .map((row) => [...new Array(size)])
+      .map((row, i) =>
+        div(
+          { class: "row" },
+          row.map((cell, j) =>
+            div({
+              id: `cell-${i}-${j}`,
+              class: "cell",
+            })
+          )
         )
-      )
-    );
+      );
   };
 
   const Baddies = () => {
@@ -35,22 +37,39 @@ const gameLoop = () => {
       };
       baddies.push(baddie);
 
-      mboard[row][col] = baddie;
       return div(
         {
           id: baddie.id,
           class: "baddy",
           style: `transform: translate3d(${col * cSize}px,${row * cSize}px,0)`,
+          emoji: baddie.bad,
         },
-        div(baddie.bad)
+        ...[...new Array(10)].map((a, i) =>
+          div(
+            {
+              class: "zer",
+              style: `transform: translateZ(${1.5 * i}px) rotateZ(45deg)`,
+            },
+            baddie.bad
+          )
+        )
       );
     });
   };
 
-  const player = div({ id: "player", class: "hidden player" }, ptoken);
+  const player = div(
+    { id: "player", class: "hidden player", emoji: ptoken },
+    ...[...new Array(10)].map((a, i) =>
+      div(
+        {
+          class: "zer",
+          style: `transform: translateZ(${1.5 * i}px) rotateZ(45deg)`,
+        },
+        ptoken
+      )
+    )
+  );
   van.add(base, Board(), Baddies(), player);
-
-  let winning = false;
   const possibles = (row, col) => {
     arr = [];
     for (var i = -1; i <= 1; i += 2) {
@@ -137,7 +156,6 @@ const gameLoop = () => {
         }
       })
       .filter((move) => move);
-    console.log(pmoves);
 
     pmoves
       .map((loc) => document.getElementById(`cell-${loc.col}-${loc.row}`))
@@ -157,6 +175,8 @@ const gameLoop = () => {
           [...document.getElementsByClassName("highlight")].forEach((c) => {
             c.classList.remove("highlight");
             c.onclick = null;
+            turn();
+            return;
           });
 
           // check if the move was a capture
@@ -164,13 +184,35 @@ const gameLoop = () => {
             const i = baddies.findIndex(
               (bad) => bad.row == move.bad[0] && bad.col === move.bad[1]
             );
-            document.getElementById(baddies[i].id).classList.add("hidden");
-            baddies.splice(i, 1);
+            const baddie = document.getElementById(baddies[i].id);
+            baddie.classList.add("dead");
+            [...baddie.children].forEach((zer) => {
+              zer.style.transform = `translate3d(${
+                Math.random() * 600 - 300
+              }px, ${Math.random() * 600 - 300}px, ${Math.random() * 100}px)`;
+              zer.style.filter = "contrast(0) brightness(10)";
+              zer.style.opacity = "0";
+            });
+            setTimeout(() => {
+              baddie.classList.add("hidden");
+              baddie.parentElement.removeChild(baddie);
+              baddies.splice(i, 1);
+            }, 500);
+
+            zzfx(...trumpet);
+            captured.push(baddie.getAttribute("emoji"));
+          } else {
+            zzfx(...dink);
           }
 
           // check if wining
-          if (!winning) {
+          if (captured.length < 3) {
             setTimeout(turn, 300);
+          } else {
+            document.getElementById("panes").innerHTML = captured.join(" ");
+            setTimeout(() => {
+              nextSlide("window");
+            }, 300);
           }
         };
       });
