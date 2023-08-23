@@ -274,6 +274,13 @@ div#central {
   stroke: #27201a;
 }
 
+#monk .thread {
+  stroke: #544131;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-dasharray: 4 3;
+}
+
 #svg_1,
 #svg_2,
 #svg_3,
@@ -383,4 +390,89 @@ div.help {
 .baddy.dead:before {
   content: "";
   display: none;
+}
+
+.tiny {
+  font-size: 0.25em;
+  color: #4d433c;
+  position: relative;
+  width: 10em;
+  height: 4em;
+  line-height: 4em;
+  pointer-events: none;
+}
+
+#match-hold,
+.help {
+  padding: 3vmin;
+  font-size: 300px;
+  width: 770px;
+  line-height: 300px;
+  border: 10px solid #615246;
+  border-radius: 20px;
+  margin: 17vmin auto;
+  background: #bbb1a8;
+  display: flex;
+  justify-content: space-around;
+}
+
+.rand {
+  position: relative;
+  text-shadow: 0 0 20px black, 0 0 10px black;
+  filter: grayscale(0.4) contrast(0.7);
+}
+
+.backing {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  transition: 0.05s ease all;
+  cursor: pointer;
+  width: 0;
+}
+
+.backing:hover {
+  transform: scale(1.1);
+}
+
+.backing:before {
+  position: absolute;
+  content: "🛡️";
+  filter: grayscale(1) contrast(0.6);
+  pointer-events: none;
+  transform: scale(2.1);
+  transform-origin: 50% 0.25em;
+  line-height: 0.95em;
+}
+
+.squig {
+  filter: url(#squig-1);
+}
+
+#s-match,
+.help button,
+#war {
+  font-size: 35px;
+  padding: 0.5em 3em;
+  margin: 1em auto;
+  background: #a21e1e;
+  color: #e9dfd9;
+  cursor: pointer;
+  transition: all 1s ease;
+  border: none;
+  clip-path: polygon(12% 50%, 0% 0%, 100% 0%, 88% 50%, 100% 100%, 0% 100%);
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+#s-match:disabled,
+button:disabled {
+  opacity: 0.2;
+}
+
+span#rand-one {
+  transform: scaleX(-1);
 }

@@ -58,14 +58,21 @@ const playMusic = (delay) => {
   }, delay || 0);
 };
 
-const toggleSFX = () => {
+const toggleSFX = (e) => {
+  if (e) {
+    e.target.classList.toggle("strike");
+  }
+
   sfx = !sfx;
   if (!sfx) {
     if (synth.cancel) synth.cancel();
   }
 };
 
-const toggleMusic = () => {
+const toggleMusic = (e) => {
+  if (e) {
+    e.target.classList.toggle("strike");
+  }
   music = !music;
 
   contexts.forEach((ac) => {
