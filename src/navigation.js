@@ -25,11 +25,11 @@ viewport.style = viewportTransform(config.base);
 const warbtn = document.getElementById("war");
 
 const nextSlide = (ns) => {
-  warbtn.style.opacity = "0";
+  warbtn.classList.remove("shown");
   if (ns == "middle" && !winning) {
     speak("we bless you, and your efforts", 0.7);
     setTimeout(() => {
-      warbtn.style.opacity = "1";
+      warbtn.classList.add("shown");
     }, 2900);
   }
   ns = document.getElementById(ns);
@@ -54,7 +54,7 @@ const nextSlide = (ns) => {
 
 slides.forEach((slide, index) => {
   points = Object.values(slide.dataset).map((n) => Number(n));
-  degs = [0, index * -10, 0];
+  degs = [0, index * -30, 0];
 
   vals = points.concat(degs);
   slide.style = contentTransform(vals);

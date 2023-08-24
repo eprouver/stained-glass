@@ -193,11 +193,11 @@ const gameLoop = (ptoken) => {
             baddie.classList.add("dead");
             [...baddie.children].forEach((zer) => {
               zer.style.transform = `translate3d(${
-                Math.random() * 1400 - 700
-              }px, ${Math.random() * 1400 - 700}px, ${
+                Math.random() * 800 - 400
+              }px, ${Math.random() * 800 - 400}px, ${
                 Math.random() * 100
               }px) rotate3d(${Math.random()},${Math.random()},${Math.random()},${
-                Math.random() * 360
+                Math.random() * 720 - 360
               }deg) scale(0.5)`;
               zer.style.filter = "contrast(0) brightness(10)";
               zer.style.opacity = "0";

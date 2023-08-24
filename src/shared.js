@@ -1,7 +1,6 @@
 const viewport = document.getElementById("viewport");
 const container = document.getElementById("container");
 const slides = [...document.getElementsByClassName("slide")];
-const help = document.getElementById("start-help");
 const captured = [];
 let vassals = [];
 
@@ -346,8 +345,6 @@ window.speechSynthesis.onvoiceschanged = function () {
   voice = voices.filter((voice) => voice.lang === "en-GB")[0];
 };
 
-document.getElementById("go").removeAttribute("disabled");
-
 const win = () => {
   [...document.getElementsByClassName("circle")].forEach((circle, i) => {
     circle.innerText = vassals[i % vassals.length];
@@ -418,6 +415,7 @@ const win = () => {
   setTimeout(() => {
     nextSlide("middle");
     document.body.classList.add("winning");
+    document.getElementById("winners").style.display = "block";
     speak("We bless you, and your wonderful efforts.");
     setTimeout(() => {
       const mPart = ["svg_1", "svg_2", "svg_3", "svg_4"];
@@ -463,6 +461,7 @@ const win = () => {
         const random = randomName(emojis[~~(Math.random() * emojis.length)]);
 
         if (it % 3 == 0) {
+          document.getElementById("winners").classList.remove("window");
           nextSlide("middle");
         }
 

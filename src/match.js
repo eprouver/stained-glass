@@ -154,3 +154,7 @@ start.onclick = () => {
   start.disabled = true;
   beepBoop();
 };
+
+setTimeout(() => {
+  document.getElementById("go").style.opacity = "1";
+});
