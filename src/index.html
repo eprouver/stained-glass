@@ -13,9 +13,7 @@
   <div id="container">
     <div id="viewport">
       <div id="middle" class="slide" data-x="-200" data-y="-1000" data-z="0">
-        <div class="squig">
         <button id="war" onclick="nextSlide('gmatch')">To Battle!</button>
-      </div>
         <div id="monk">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 323">
             <defs>
@@ -27,23 +25,6 @@
                 <stop stop-color="#513720" offset="0"/>
                 <stop stop-color="#261f1a" offset="1"/>
               </radialGradient>
-
-              <defs>
-                <filter id="squig-1">
-                  <feTurbulence id="turbulence" baseFrequency="0.01" numOctaves="5" result="noise" seed="0"/>
-                  <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="2" out="sq" />
-                </filter>
-
-                <animate 
-                xlink:href="#displacement"
-                attributeName="scale"
-                calcMode="linear"
-                values="2;3;2"
-                keyTimes="0; 0.5; 1"
-                dur="10s"
-                repeatCount="indefinite"/>
-
-              </defs> 
             </defs>
             <path fill="url(#svg_17)" d="M79 130c-65 83-56 148-56 148s-65 44 45 38 79-55 79-55-3-214-68-131z" id="svg_1"/>
             <g transform="rotate(3 67 211)">
@@ -58,7 +39,7 @@
     </div>
 
 <div id="window" class="slide" data-x="0" data-y="-1200" data-z="-300">
-  <div id="chooser" class="help squig">
+  <div id="chooser" class="help">
     <h2>Select the panes to glorify your victory!</h2>
     <h1 id="panes"></h1>
   </div>
@@ -82,11 +63,11 @@
 </div>
 
 <div id="gmatch" class="slide" data-x="0" data-y="-3050" data-z="-600">
-  <div class="squig">
+
   <button id="s-match" role="button">Spin for New Vassals</button>
-</div>
+
   <div id="s-dialog">
-  <div id="match-hold" class="squig">
+  <div id="match-hold">
     <div class="backing">
         <span id="rand-one" class="rand"></span>
     </div>
@@ -117,10 +98,11 @@
   </button>
 </div>
 
-<div id="start-help" class="help squig">
-  <h1>⚔️</h1>
+<div id="start-help" class="help">
+  <br/>
   <h1>Winner's Window</h1>
-  <p>Guide your vassals to victory and complete the whole stained glass window for the monastery.</p>
+  <p>Guide your vassals to victory!<br/>
+     Complete the whole stained glass window for the monastery.</p>
 
     <button id="go" onclick="help.style.display = 'none'; toggleMusic(); nextSlide('middle')" disabled >
       Let's Go!

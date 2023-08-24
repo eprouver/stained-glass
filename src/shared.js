@@ -106,6 +106,7 @@ const emojis = [
   "☀️",
   "🕯️",
   "🥪",
+  "🪷",
 ];
 
 // ZzFXMicro - Zuper Zmall Zound Zynth - v1.2.0 by Frank Force ~ 880 bytes

@@ -5,6 +5,7 @@ const gameLoop = (ptoken) => {
   let baddies = [];
 
   const base = document.getElementById("b-base");
+  base.classList.remove("winner");
   base.innerHTML = "";
 
   let bmoj = [ptoken];
@@ -213,7 +214,7 @@ const gameLoop = (ptoken) => {
             zzfx(...dink);
           }
 
-          // check if wining
+          // check if winning
           if (captured.length < 3) {
             setTimeout(turn, 600);
           } else {
@@ -221,6 +222,7 @@ const gameLoop = (ptoken) => {
             zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
 
             setTimeout(() => {
+              base.classList.add("winner");
               zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
               zzfx(
                 ...[
@@ -246,6 +248,7 @@ const gameLoop = (ptoken) => {
                   1,
                 ]
               );
+
               [...document.getElementsByClassName("baddy")]
                 .concat([...document.getElementsByClassName("cell")])
                 .forEach((c) => (c.style.transform = "rotate(45deg) scale(0)"));

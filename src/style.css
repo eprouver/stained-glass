@@ -78,10 +78,10 @@ h1 {
   content: "";
   position: absolute;
   width: 100000px;
-  height: 100px;
-  bottom: 0;
+  height: 1000px;
+  bottom: -890px;
   left: -5000px;
-  background: linear-gradient(180deg, #0c0b0a 0%, #6d5d50 7%, #0c0b0a 100%);
+  background: linear-gradient(180deg, #0c0b0a 0%, #6d5d50 0.7%, #0c0b0a 20%);
 }
 
 #window:not(.active) {
@@ -169,7 +169,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  background: #544131;
+  background: #68584c;
   transform: translateY(0);
   transition: transform 1s cubic-bezier(0.985, -0.005, 1, 0.38);
   cursor: pointer;
@@ -179,7 +179,6 @@ h1 {
   font-size: 34px;
   color: #0c0b0a;
   line-height: 200px;
-  text-shadow: 1px -2px 2px #6e523a;
 }
 #holder {
   display: flex;
@@ -294,7 +293,6 @@ div.help {
   font-size: 20px;
   line-height: 2em;
   margin: 40px auto;
-  outline: 2000px solid black;
   left: 10%;
   width: 80%;
 }
@@ -311,11 +309,12 @@ div.help {
   flex-direction: column;
   margin: 0 auto;
   width: calc(var(--cSize) * 5);
-  box-shadow: 0 40px 10px -20px #373737;
+  box-shadow: 0 3px 0 5px #bbb1a8, 0 5px 0 13px #786e65, 0 16px 0px 11px #574f47;
   border-radius: 15px;
-  background: #aaa;
+  background: #bbb1a8;
   transform: translateZ(-500px) scale(2) rotateX(37deg);
   transform-style: preserve-3d;
+  transition: 0.5s ease all;
   pointer-events: all;
 }
 
@@ -328,8 +327,8 @@ div.help {
   height: var(--cSize);
   display: inline-block;
   transform: rotate(45deg) scale(0.75);
-  background: #ccc;
-  box-shadow: 0 0 2px black;
+  background: #d5d0cb;
+  box-shadow: 3px 4px 6px #666, inset -4px -7px 8px #0006;
   border-radius: 15px;
 }
 
@@ -351,8 +350,7 @@ div.help {
   height: var(--cSize);
   text-align: center;
   line-height: var(--cSize);
-  top: 3px;
-  left: -3px;
+  top: -6px;
 }
 .baddy,
 .player,
@@ -361,13 +359,23 @@ div.help {
   transform-style: preserve-3d;
 }
 
+#b-base.winner {
+  border-radius: 100%;
+  box-shadow: inset 0 0 20px #000;
+}
+
+#b-base.winner #player {
+  transform: translate3d(250px, 380px, 110px) rotateZ(-50deg) rotateX(-25deg)
+    rotateY(-30deg) scale(2.5) !important;
+}
+
 .hidden {
   display: none;
 }
 
 .zer {
   position: absolute;
-  text-shadow: 0 0.02em 0.02em rgb(70 70 70);
+  text-shadow: 0 0.02em 0.02em rgb(30 30 30);
   width: 100%;
   pointer-events: none;
   transition: 1s ease all;
@@ -381,13 +389,14 @@ div.help {
   width: 1.45em;
   position: absolute;
   display: block;
-  top: 0.1em;
-  left: 0em;
-  filter: grayscale(0.2) brightness(0.2) blur(0.04em);
+  top: 0.08em;
+  left: -0.03em;
+  filter: brightness(0) blur(0.025em) drop-shadow(-4px 3px 0 black);
   transform: rotate(45deg);
 }
 
-.baddy.dead:before {
+.baddy.dead:before,
+#b-base.winner #player:before {
   content: "";
   display: none;
 }
@@ -410,7 +419,7 @@ div.help {
   line-height: 300px;
   border: 10px solid #615246;
   border-radius: 20px;
-  margin: 17vmin auto;
+  margin: 10vh auto;
   background: #bbb1a8;
   display: flex;
   justify-content: space-around;
@@ -446,10 +455,6 @@ div.help {
   line-height: 0.95em;
 }
 
-.squig {
-  filter: url(#squig-1);
-}
-
 #s-match,
 .help button,
 #war {
@@ -475,4 +480,32 @@ button:disabled {
 
 span#rand-one {
   transform: scaleX(-1);
+}
+#start-help {
+  outline: 2000px solid black;
+  margin: 110px auto;
+}
+
+#start-help:before {
+  content: "👑";
+  position: absolute;
+  top: 0;
+  left: -0.25em;
+  transform: scale(13) rotate(-45deg);
+  transform-origin: 50% 50%;
+  line-height: 1em;
+  height: 1em;
+  width: 1em;
+}
+
+#start-help:after {
+  content: "🗡️";
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  transform: scale(13);
+  transform-origin: 50% 50%;
+  line-height: 1em;
+  height: 1em;
+  width: 1em;
 }
