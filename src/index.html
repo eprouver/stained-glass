@@ -82,7 +82,7 @@
 </div>
 
 <div id="gboard" class="slide" data-x="340" data-y="-6270" data-z="-4000">
-  <h2 style="color:white">Place your Vassal. Capture 3 pieces to win. Other pieces cannot jump you.</h2>
+  <h1 style="font-size: 30px">Place your Vassal. Capture 3 pieces to win. Other pieces cannot jump you.</h1>
   <div id="b-base"></div>
 </div> 
 
@@ -98,6 +98,11 @@
   <button onclick="toggleMusic(event)">
     Music
   </button>
+
+  <div id="winners" style="display:none">
+    <button id="winner" onclick="nextSlide('window'); document.getElementById('winners').classList.toggle('window')">Appreciate the window</button>
+    <button id="party" onclick="nextSlide('middle'); document.getElementById('winners').classList.toggle('window')"">Back to the Party</button>
+    </div>
 </div>
 
 <div id="start-help" class="help">
@@ -123,11 +128,6 @@
   </filter>
 
 </svg>
-
-<div id="winners" style="display:none">
-<button id="winner" onclick="nextSlide('window'); document.getElementById('winners').classList.toggle('window')">Appreciate the window</button>
-<button id="party" onclick="nextSlide('middle'); document.getElementById('winners').classList.toggle('window')"">Back to the Party</button>
-</div>
 
 <script  src="./shared.js"></script>
 <script  src="./music.js"></script>

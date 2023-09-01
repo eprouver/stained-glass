@@ -195,9 +195,9 @@ const gameLoop = (ptoken) => {
               zer.style.transform = `translate3d(${
                 Math.random() * 800 - 400
               }px, ${Math.random() * 800 - 400}px, ${
-                Math.random() * 100
-              }px) rotate3d(${Math.random()},${Math.random()},${Math.random()},${
-                Math.random() * 720 - 360
+                Math.random() * 200
+              }px) rotateX(${Math.random() * 2000 - 1000}deg) rotateY(${
+                Math.random() * 2000 - 1000
               }deg) scale(0.5)`;
               zer.style.filter = "contrast(0) brightness(10)";
               zer.style.opacity = "0";

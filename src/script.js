@@ -142,7 +142,6 @@ setTimeout(() => {
   const panes = document.getElementsByClassName("glass");
   const central = document.getElementById("central");
   central.style.backgroundImage = `url(${panes[6].toDataURL()})`;
-  central.style.backgroundSize = "cover";
 
   emojis.slice(0, 10).forEach((month, i) => {
     if (i == 1) return;
@@ -156,7 +155,6 @@ setTimeout(() => {
     hh.style.filter = `contrast(0.8) brightness(1.2)`;
 
     hh.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
-    hh.style.backgroundSize = "cover";
     const text = div();
     text.innerText = month;
     hh.appendChild(text);
