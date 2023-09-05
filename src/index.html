@@ -25,8 +25,22 @@
                 <stop stop-color="#513720" offset="0"/>
                 <stop stop-color="#261f1a" offset="1"/>
               </radialGradient>
+              <filter id="displacementFilter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="100" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
+              <mask id="circleMask">
+                <circle cx="200" cy="200" r="0" fill="#fff" class="displacement" />
+              </mask>
 
-
+              <filter id="light">
+                <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#998">
+                  <fePointLight x="120" y="40" z="100">
+                    <animate attributeName="x" values="40;200;40" dur="14s" repeatCount="999" />
+                    <fePointLight />
+                </feSpecularLighting>
+                <feComposite in="SourceGraphic" in2="spec4" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+              </filter>
             </defs>
             <path fill="url(#svg_17)" d="M79 130c-65 83-56 148-56 148s-65 44 45 38 79-55 79-55-3-214-68-131z" id="svg_1"/>
             <g transform="rotate(3 67 211)">
@@ -65,9 +79,7 @@
 </div>
 
 <div id="gmatch" class="slide" data-x="0" data-y="-3050" data-z="-600">
-
-  <button id="s-match" role="button">Spin for New Vassals</button>
-
+  <button id="s-match" role="button">Click for New Vassals</button>
   <div id="s-dialog">
   <div id="match-hold">
     <div class="backing">
@@ -82,8 +94,9 @@
 </div>
 
 <div id="gboard" class="slide" data-x="340" data-y="-6270" data-z="-4000">
-  <h1 style="font-size: 30px">Place your Vassal. Capture 3 pieces to win. Other pieces cannot jump you.</h1>
+  <h1 style="font-size: 30px">Place your Vassal. Jump 3 to win. Other pieces cannot jump you.</h1>
   <div id="b-base"></div>
+  <h1 id="capt">🐴 🐴 🐴</h1>
 </div> 
 
 </div>
@@ -106,28 +119,23 @@
 </div>
 
 <div id="start-help" class="help">
+  <svg id="crown" class="deco" viewbox="0 0 400 400">
+    <text y="300" x="10" lengthAdjust="spacingAndGlyphs" textLength="350" font-size="340" mask="url(#circleMask)">👑</text>
+  </svg>
   <br/>
   <h1>Winner's Window</h1>
   <p>Guide your vassals to victory!<br/>
      Complete the whole stained glass window for the monastery.</p>
 
+     <div>
     <button id="go" style="opacity: 0" onclick="document.getElementById('start-help').style.display = 'none'; toggleMusic(); nextSlide('middle')" >
       Let's Go!
     </button>
-
+  </div>
+    <svg id="diamond" class="deco" viewbox="0 0 400 400" textLength="400">
+      <text y="300" x="10" lengthAdjust="spacingAndGlyphs" textLength="350" font-size="340" mask="url(#circleMask)">💎</text>
+    </svg>
 </div>
-
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="400" height="704" viewBox="0 0 300 528">
-  <filter id="light">
-    <feSpecularLighting result="spec4" specularExponent="20" lighting-color="#998">
-      <fePointLight x="120" y="40" z="100">
-        <animate attributeName="x" values="40;200;40" dur="14s" repeatCount="999" />
-        <fePointLight />
-    </feSpecularLighting>
-    <feComposite in="SourceGraphic" in2="spec4" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
-  </filter>
-
-</svg>
 
 <script  src="./shared.js"></script>
 <script  src="./music.js"></script>

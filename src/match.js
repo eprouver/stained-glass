@@ -157,4 +157,9 @@ start.onclick = () => {
 
 setTimeout(() => {
   document.getElementById("go").style.opacity = "1";
-});
+  document.querySelector(".displacement").animate([{ r: "0" }, { r: "300" }], {
+    duration: 4000,
+    iterations: 1,
+    fill: "forwards",
+  });
+}, 10);

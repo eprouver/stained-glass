@@ -5,8 +5,10 @@ const gameLoop = (ptoken) => {
   let baddies = [];
 
   const base = document.getElementById("b-base");
+  const capt = document.getElementById("capt");
   base.classList.remove("winner");
   base.innerHTML = "";
+  capt.innerHTML = "";
 
   let bmoj = [ptoken];
 
@@ -53,7 +55,7 @@ const gameLoop = (ptoken) => {
           div(
             {
               class: "zer",
-              style: `transform: translateZ(${1.5 * i}px) rotateZ(45deg)`,
+              style: `transform: translateZ(${0.02 * i}em) rotateZ(45deg)`,
             },
             baddie.bad
           )
@@ -64,11 +66,11 @@ const gameLoop = (ptoken) => {
 
   const player = div(
     { id: "player", class: "hidden player", emoji: ptoken },
-    ...[...new Array(10)].map((a, i) =>
+    ...[...new Array(20)].map((a, i) =>
       div(
         {
           class: "zer",
-          style: `transform: translateZ(${1.5 * i}px) rotateZ(45deg)`,
+          style: `transform: translateZ(${0.01 * i}em) rotateZ(45deg)`,
         },
         ptoken
       )
@@ -210,6 +212,7 @@ const gameLoop = (ptoken) => {
 
             zzfx(...trumpet);
             captured.push(baddie.getAttribute("emoji"));
+            capt.innerText += baddie.getAttribute("emoji");
           } else {
             zzfx(...dink);
           }
@@ -254,8 +257,11 @@ const gameLoop = (ptoken) => {
                 .forEach((c) => (c.style.transform = "rotate(45deg) scale(0)"));
             }, 500);
             setTimeout(() => {
+              setTimeout(() => {
+                base.classList.remove("winner");
+              }, 1000);
               nextSlide("window");
-            }, 1800);
+            }, 2100);
           }
         };
       });
