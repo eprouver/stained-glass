@@ -129,6 +129,27 @@ function cloneCanvas(oldCanvas) {
   return newCanvas;
 }
 
+const holder = div({ id: "holder" });
+const central = div({ id: "central" });
+van.add(
+  document.getElementById("window"),
+  div(
+    { id: "chooser", class: "help" },
+    h2("Select the panes to glorify your victory!"),
+    h1({ id: "panes" })
+  ),
+  div(
+    { id: "high" },
+    van.add(holder, central),
+    div(
+      { id: "wall" },
+      div({ id: "holder1", class: "b-hold" }),
+      div({ id: "holder2", class: "b-hold" }),
+      div({ id: "holder3", class: "b-hold" })
+    )
+  )
+);
+
 /* windows */
 for (let i = 1; i < 4; i++) {
   const holdme = document.getElementById(`holder${i}`);
@@ -138,9 +159,8 @@ for (let i = 1; i < 4; i++) {
 }
 
 /* Rosetta window */
-const holder = document.getElementById("holder");
 const panes = document.getElementsByClassName("glass");
-const central = document.getElementById("central");
+
 central.style.backgroundImage = `url(${panes[6].toDataURL()})`;
 
 [...new Array(10)].forEach((u, i) => {

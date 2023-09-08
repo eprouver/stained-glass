@@ -377,7 +377,7 @@ div.help {
 }
 
 #b-base.winner {
-  transition: all 1s ease-in-out 1s;
+  transition: all 0.9s ease-in-out 0.9s;
   opacity: 0;
 }
 

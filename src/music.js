@@ -71,9 +71,6 @@ const toggleSFX = (e) => {
 };
 
 const toggleMusic = (e) => {
-  if (e) {
-    e.target.classList.toggle("strike");
-  }
   music = !music;
 
   contexts.forEach((ac) => {

@@ -177,7 +177,6 @@ const emojis = [
   "🧅",
   "🥄",
   "🦋",
-  "🧺",
   "🌮",
   "🐳",
 ];
@@ -288,6 +287,7 @@ function weightedRandomNumber(min, max) {
   return min + scaled;
 }
 
+/* Van JS: https://vanjs.org/ */
 {
   let e, t, l, r, o, n, f, s, a, i, d, u, _, w, g, h, v, S, c, y, V, b;
   (n = (o = Object).getPrototypeOf),
@@ -396,7 +396,7 @@ function weightedRandomNumber(min, max) {
     }),
     (window.van = b);
 }
-const { div, button, span } = van.tags;
+const { div, button, span, h1, h2 } = van.tags;
 
 const synth = window.speechSynthesis;
 let voice, utterance;
@@ -427,7 +427,7 @@ const win = () => {
     clearInterval(interval);
   }
   war.style.display = "none";
-  document.getElementById("chooser").style.display = "none";
+  chooser.style.display = "none";
   holder.style.opacity = "1";
   zzfx(...low);
   zzfx(

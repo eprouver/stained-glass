@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <title>The Monk's Window</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👴🏼</text></svg>">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
 
   <div id="container">
     <div id="viewport">
@@ -54,26 +54,6 @@
     </div>
 
 <div id="window" class="slide" data-x="800" data-y="1600" data-z="-500">
-  <div id="chooser" class="help">
-    <h2>Select the panes to glorify your victory!</h2>
-    <h1 id="panes"></h1>
-  </div>
-<div id="high">
-  <div id="holder">
-    <div id="central">
-
-    </div>
-  </div>
-
-  <div id="wall">
-    <div id="holder1" class="b-hold">
-    </div>
-    <div id="holder2" class="b-hold">
-    </div>
-    <div id="holder3" class="b-hold">
-    </div>
-  </div>
-</div>
 
 </div>
 
@@ -84,7 +64,7 @@
 <div id="gboard" class="slide" data-x="300" data-y="4070" data-z="-2200">
   <h1 style="font-size: 30px">Place your Vassal. Jump 3 to win. Other pieces cannot jump you.</h1>
   <div id="b-base"></div>
-  <h1 id="capt">🐴 🐴 🐴</h1>
+  <h1 id="capt"></h1>
 </div> 
 
 </div>
@@ -93,11 +73,8 @@
 </div>
 
 <div id="options">
-  <button onclick="toggleSFX(event)">
-    SFX
-  </button>
-  <button onclick="toggleMusic(event)">
-    Music
+  <button onclick="toggleSFX(event); toggleMusic(event)">
+    Sound
   </button>
 
   <div id="winners" style="display:none">
