@@ -30,6 +30,9 @@ const nextSlide = (ns) => {
     speak("we bless you, and your efforts", 0.7);
     setTimeout(() => {
       warbtn.classList.add("shown");
+      setTimeout(() => {
+        zzfx(...bell);
+      }, 800);
     }, 2900);
   }
   ns = document.getElementById(ns);
@@ -64,12 +67,3 @@ const slideValues = ["middle", "gmatch", "gboard", "window"]; // Your array of s
 
 /* Helpers */
 let currentIndex = 0; // Initial index
-
-// Event listener for space bar key press
-document.body.addEventListener("keyup", (e) => {
-  e.stopPropagation();
-  e.preventDefault();
-  if (e.key === " ") {
-    nextSlide(slideValues[currentIndex]);
-  }
-});

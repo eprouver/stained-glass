@@ -1,4 +1,7 @@
+let round = 0;
+
 const gameLoop = (ptoken) => {
+  round += 1;
   vassals.push(ptoken);
   const size = 5;
   const cSize = 130;
@@ -34,7 +37,7 @@ const gameLoop = (ptoken) => {
 
   const Baddies = () => {
     return [...new Array(10)].map((bad, i) => () => {
-      const row = (i % 2) + (size - 2);
+      const row = round % 2 == 0 ? (i % 2) + (size - 2) : i % 2;
       const col = i % 5;
       const baddie = {
         bad: bmoj[i % bmoj.length],
@@ -66,11 +69,11 @@ const gameLoop = (ptoken) => {
 
   const player = div(
     { id: "player", class: "hidden player", emoji: ptoken },
-    ...[...new Array(20)].map((a, i) =>
+    ...[...new Array(10)].map((a, i) =>
       div(
         {
           class: "zer",
-          style: `transform: translateZ(${0.01 * i}em) rotateZ(45deg)`,
+          style: `transform: translateZ(${0.02 * i}em) rotateZ(45deg)`,
         },
         ptoken
       )
@@ -214,7 +217,7 @@ const gameLoop = (ptoken) => {
             captured.push(baddie.getAttribute("emoji"));
             capt.innerText += baddie.getAttribute("emoji");
           } else {
-            zzfx(...dink);
+            zzfx(...drum);
           }
 
           // check if winning
@@ -222,11 +225,11 @@ const gameLoop = (ptoken) => {
             setTimeout(turn, 600);
           } else {
             document.getElementById("panes").innerHTML = captured.join(" ");
-            zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
+            zzfx(...drum);
 
             setTimeout(() => {
               base.classList.add("winner");
-              zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
+              zzfx(...drum);
               zzfx(
                 ...[
                   0.7,
@@ -255,11 +258,15 @@ const gameLoop = (ptoken) => {
               [...document.getElementsByClassName("baddy")]
                 .concat([...document.getElementsByClassName("cell")])
                 .forEach((c) => (c.style.transform = "rotate(45deg) scale(0)"));
+
+              setTimeout(() => {
+                zzfx(...drum);
+              }, 500);
             }, 500);
             setTimeout(() => {
               setTimeout(() => {
                 base.classList.remove("winner");
-              }, 1000);
+              }, 5000);
               nextSlide("window");
             }, 2100);
           }
@@ -268,8 +275,10 @@ const gameLoop = (ptoken) => {
   };
 
   // place your token
-  const starts = [...document.getElementsByClassName("cell")].filter(
-    (cell) => Number(cell.id.split("-")[1]) < 3
+  const starts = [...document.getElementsByClassName("cell")].filter((cell) =>
+    round % 2 == 0
+      ? Number(cell.id.split("-")[1]) < 3
+      : Number(cell.id.split("-")[1]) > 1
   );
 
   starts.forEach((cell) => {

@@ -23,28 +23,96 @@ const randBetween = (min, max) => {
   return ~~(m.random() * (max - min + 1) + min);
 };
 
-const dink = [
-  0.75,
+const drum = [1, 0.5, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05];
+const low = [
+  0.7,
   0,
-  730.8128,
+  200,
+  0.1,
+  3,
+  0.2,
   ,
-  0.03,
-  0.07,
+  3.5,
+  ,
+  ,
+  ,
+  ,
+  0.02,
+  ,
+  ,
+  ,
+  ,
+  0.72,
+  0.12,
+  0.5,
+];
+const dink = [
+  0.7,
+  0,
+  206,
+  0.01,
+  0.1,
+  0.1,
   1,
-  1.21,
+  1.77,
   ,
   ,
+  50,
+  0.07,
+  ,
+  0.1,
   ,
   ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  0.47,
+  0.2,
+  0.51,
+  0.3,
   0.07,
 ];
-const trumpet = [0.45, 0, 43, , 0.25, 0.25, 2, 22, , , 50, , 0.3, , , , , 0.87];
+const trumpet = [
+  0.5,
+  0,
+  100,
+  0.03,
+  0.53,
+  0.45,
+  2,
+  2.2,
+  ,
+  ,
+  50,
+  0.25,
+  0.2,
+  0.1,
+  ,
+  ,
+  0.13,
+  0.35,
+  0.1,
+  0.1,
+];
+
+const bell = [
+  0.5,
+  0,
+  166,
+  0.002,
+  0.7,
+  0.9,
+  ,
+  2,
+  0.3,
+  ,
+  ,
+  ,
+  0.01,
+  ,
+  ,
+  ,
+  ,
+  0.6,
+  0.07,
+  0.86,
+];
 
 const emojis = [
   "🐕",
@@ -105,6 +173,13 @@ const emojis = [
   "☀️",
   "🕯️",
   "🥪",
+  "🍖",
+  "🧅",
+  "🥄",
+  "🦋",
+  "🧺",
+  "🌮",
+  "🐳",
 ];
 
 // ZzFXMicro - Zuper Zmall Zound Zynth - v1.2.0 by Frank Force ~ 880 bytes
@@ -321,7 +396,7 @@ function weightedRandomNumber(min, max) {
     }),
     (window.van = b);
 }
-const { div } = van.tags;
+const { div, button, span } = van.tags;
 
 const synth = window.speechSynthesis;
 let voice, utterance;
@@ -336,41 +411,11 @@ const speak = (text, volume = 0.4) => {
   synth.speak(utterance);
 };
 
-// Wait for the voices to be loaded
-window.speechSynthesis.onvoiceschanged = function () {
-  // Get all available voices
-  const voices = speechSynthesis.getVoices();
-  // Find the British male voice
-  voice = voices.filter((voice) => voice.lang === "en-GB")[0];
-};
-
 const win = () => {
   [...document.getElementsByClassName("circle")].forEach((circle, i) => {
     circle.innerText = vassals[i % vassals.length];
   });
   winning = true;
-  const low = [
-    0.7,
-    0,
-    200,
-    0.1,
-    3,
-    0.2,
-    ,
-    3.5,
-    ,
-    ,
-    ,
-    ,
-    0.02,
-    ,
-    ,
-    ,
-    ,
-    0.72,
-    0.12,
-    0.5,
-  ];
   music = false;
   contexts.forEach((ac) => {
     if (ac && ac.state == "running") {
@@ -411,6 +456,10 @@ const win = () => {
   );
   zzfx(...[0.7, 0, 400, 0.1, 3, 0.2, , 3.5, , , , , , , , , , 0.72, 0.12, 0.5]);
 
+  let highs = [...document.getElementsByClassName("circle")]
+    .concat([...document.getElementsByClassName("bord")])
+    .concat([document.getElementById("central")]);
+
   setTimeout(() => {
     nextSlide("middle");
     document.body.classList.add("winning");
@@ -437,22 +486,21 @@ const win = () => {
 
       setInterval(() => {
         zzfx(...[1, 0, 121, , 0.12, , , 4, , , , , , , , , , 0, 0.05]);
-        [...document.getElementsByClassName("circle")]
-          .concat([...document.getElementsByClassName("bord")])
-          .concat([document.getElementById("central")])
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 4)
-          .forEach(
-            (el) => (el.style.filter = `hue-rotate(${Math.random() * 360}deg)`)
-          );
+
+        [...new Array(4)].forEach(
+          () =>
+            (highs[
+              ~~(Math.random() * highs.length)
+            ].style.filter = `hue-rotate(${Math.random() * 360}deg)`)
+        );
 
         monk.style.filter = `hue-rotate(${Math.random() * 20 - 10}deg)`;
       }, 400);
 
       setInterval(() => {
-        monk.style.transform = `scale(1.2) translate3d(${
-          Math.random() * 210
-        }%,250px, 0) rotate(${Math.random() > 0.5 ? -3 : 3}deg`;
+        monk.style.transform = `scale(1.5) translate3d(${
+          Math.random() * 180
+        }%,350px, 0) rotate(${Math.random() > 0.5 ? -3 : 3}deg`;
       }, 5000);
       let it = 0;
       setInterval(() => {
@@ -490,6 +538,16 @@ const win = () => {
           );
         }
       }, 10000);
+      setInterval(() => {
+        [...new Array(4)].forEach((o, i) => {
+          setTimeout(() => {
+            zzfx(...bell);
+            highs.forEach(
+              (el) => (el.style.filter = `hue-rotate(${90 * (i + 1)}deg)`)
+            );
+          }, i * 1000);
+        });
+      }, 25000);
     }, 5000);
   }, 5000);
 };

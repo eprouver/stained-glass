@@ -1,7 +1,24 @@
-const start = document.getElementById("s-match");
+const start = button(
+  { id: "s-match", role: "button" },
+  "Click for New Vassals"
+);
 const gmatch = document.getElementById("gmatch");
-const randOne = document.getElementById("rand-one");
-const randTwo = document.getElementById("rand-two");
+const randOne = span({ id: "rand-one", class: "rand" });
+const randTwo = span({ id: "rand-two", class: "rand" });
+
+van.add(
+  gmatch,
+  start,
+  div(
+    { id: "s-dialog" },
+    div(
+      { id: "match-hold" },
+      div({ class: "backing" }, randOne),
+      div({ class: "tiny" }, "or"),
+      div({ class: "backing" }, randTwo)
+    )
+  )
+);
 
 function randomName(emoji) {
   const plants = [
@@ -66,6 +83,8 @@ const clearMatch = () => {
   setTimeout(() => {
     randOne.innerText = "";
     randTwo.innerText = "";
+    randOne.parentElement.classList.remove("spark");
+    randTwo.parentElement.classList.remove("spark");
   }, 1000);
 };
 
@@ -75,6 +94,8 @@ const beepBoop = () => {
   if (!booping || timer > 900) {
     setTimeout(() => {
       zzfx(...trumpet);
+      randOne.parentElement.classList.add("spark");
+      randTwo.parentElement.classList.add("spark");
 
       const name1 = randomName(randOne.innerText);
       randOne.onclick = () => {
@@ -83,6 +104,7 @@ const beepBoop = () => {
         nextSlide("gboard");
         clearMatch();
         gameLoop(randOne.innerText);
+        zzfx(...drum);
       };
       const name2 = randomName(randTwo.innerText);
       randTwo.onclick = () => {
@@ -91,6 +113,7 @@ const beepBoop = () => {
         nextSlide("gboard");
         clearMatch();
         gameLoop(randTwo.innerText);
+        zzfx(...drum);
       };
 
       speak(`Choose Your Vassal, , , , ${name1}, , or ${name2}`);
@@ -104,16 +127,14 @@ const beepBoop = () => {
   } else {
     zzfx(
       ...[
-        0.25,
+        0.4,
         0.5,
-        430.8128,
+        400,
+        0.05,
+        0.2,
+        0.02,
         ,
-        0.03,
-        0.07,
-        1,
-        1.21,
-        ,
-        ,
+        4,
         ,
         ,
         ,
@@ -121,8 +142,11 @@ const beepBoop = () => {
         ,
         ,
         ,
-        0.47,
-        0.07,
+        ,
+        0.25,
+        0.13,
+        0.1,
+        0.6,
       ]
     );
   }
@@ -152,14 +176,33 @@ start.onclick = () => {
   booping = true;
   gmatch.style.pointerEvents = "none";
   start.disabled = true;
+  randOne.parentElement.classList.remove("spark");
+  randTwo.parentElement.classList.remove("spark");
   beepBoop();
 };
 
 setTimeout(() => {
-  document.getElementById("go").style.opacity = "1";
+  voice = speechSynthesis
+    .getVoices()
+    .filter((voice) => voice.lang === "en-GB")[0];
+  const go = document.getElementById("go");
+  go.addEventListener("click", () => {
+    document.getElementById("start-help").style.display = "none";
+    toggleMusic();
+    nextSlide("middle");
+  });
+  go.style.opacity = "1";
   document.querySelector(".displacement").animate([{ r: "0" }, { r: "300" }], {
     duration: 4000,
     iterations: 1,
     fill: "forwards",
   });
+
+  [...document.getElementsByTagName("button")].forEach((el) =>
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      zzfx(...drum);
+    })
+  );
 }, 10);

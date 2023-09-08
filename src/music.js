@@ -52,6 +52,7 @@ const songs = [
 const playMusic = (delay) => {
   const song = songs[~~(m.random() * songs.length)];
   contexts = [null, null];
+
   P(song, 0);
   setTimeout(() => {
     P(song, 1);

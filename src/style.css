@@ -55,7 +55,7 @@ p {
 #viewport {
   position: absolute;
   transform-origin: left top;
-  transition: all 0.8s ease-in-out 0ms;
+  transition: all 1.8s ease-in-out;
   transform-style: preserve-3d;
 }
 
@@ -64,7 +64,7 @@ p {
   position: absolute;
   width: 1200px;
   height: 900px;
-  transition: all 1s ease-in-out 0ms;
+  transition: all 1s ease-in-out 1s;
   pointer-events: none;
   opacity: 0;
 }
@@ -184,6 +184,7 @@ p {
   transform: translateY(0);
   transition: transform 1s cubic-bezier(0.985, -0.005, 1, 0.38);
   cursor: pointer;
+  box-shadow: inset 0 -20px 30px -10px #251e1a;
 }
 #window.active .cover:after {
   content: "select";
@@ -222,6 +223,7 @@ p {
   text-align: center;
   line-height: 1.4em;
   text-shadow: 0 0 5px black;
+  mix-blend-mode: hard-light;
 }
 .div1 {
   grid-area: 1 / 1 / 2 / 2;
@@ -320,14 +322,14 @@ div.help {
   flex-direction: column;
   margin: 0 auto;
   width: 650px;
-  box-shadow: 0 3px 0 2px #a3988b, 0 5px 0 13px #786e65, 0 18px 0px 11px #4e463f,
+  box-shadow: 0 3px 0 2px #998b7a, 0 5px 0 13px #786e65, 0 18px 0px 11px #4e463f,
     0 29px 0px 8px #4e463f;
   border-radius: 15px;
   background: #bbb1a8;
   transform: translateZ(-500px) scale(2) rotateX(37deg);
   transform-style: preserve-3d;
   pointer-events: all;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .01'/%3E%3CfeColorMatrix values='0 0 0 .3 .03 0 0 0 .2 .02 0 0 0 .1 .01 0 0 0 0 0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filter)'/%3E%3C/svg%3E%0A");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .01'/%3E%3CfeColorMatrix values='0 0 0 .3 .03 0 0 0 .2 .02 0 0 0 .1 .01 0 0 0 0 0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filter)'/%3E%3C/svg%3E%0A");
   padding: 3px;
 }
 
@@ -367,9 +369,16 @@ div.help {
 }
 .baddy,
 .player,
-.cell {
+.cell,
+#s-dialog,
+#match-hold {
   transition: 0.2s ease all;
   transform-style: preserve-3d;
+}
+
+#b-base.winner {
+  transition: all 1s ease-in-out 1s;
+  opacity: 0;
 }
 
 #b-base.winner #player {
@@ -435,7 +444,7 @@ div.help {
 .help {
   padding: 3vmin;
   font-size: 300px;
-  width: 770px;
+  width: 700px;
   line-height: 300px;
   border: 10px solid #615246;
   border-radius: 20px;
@@ -470,6 +479,54 @@ div.help {
   z-index: 1;
 }
 
+.backing.spark:first-child {
+  animation: spark 1.9s 0.1s ease;
+}
+
+.backing.spark {
+  animation: lspark 2s ease;
+}
+
+@keyframes spark {
+  0% {
+    transform: translateZ(0px) rotateY(0deg) scale(1);
+  }
+  15% {
+    transform: translateZ(100px) rotateZ(-3deg) rotateY(-5deg) scale(0.8);
+    filter: none;
+  }
+  30% {
+    transform: translateZ(100px) rotateZ(-6deg) rotateY(15deg) scale(1);
+    filter: brightness(1.4);
+  }
+  50% {
+    filter: none;
+  }
+  100% {
+    transform: translateZ(0px) rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes lspark {
+  0% {
+    transform: translateZ(0px) rotateY(0deg) scale(1);
+  }
+  15% {
+    filter: none;
+    transform: translateZ(100px) rotateZ(3deg) rotateY(5deg) scale(0.8);
+  }
+  30% {
+    transform: translateZ(100px) rotateZ(6deg) rotateY(-15deg) scale(1);
+    filter: brightness(1.4);
+  }
+  50% {
+    filter: none;
+  }
+  100% {
+    transform: translateZ(0px) rotateY(0deg) scale(1);
+  }
+}
+
 .backing:hover {
   transform: scale(1.1);
 }
@@ -490,7 +547,7 @@ div.help {
 #war {
   font-size: 35px;
   padding: 0.5em 1.4em;
-  margin: 1em auto;
+  margin: 1.5em auto 0.5em;
   background: #931616;
   color: #cdbfb4;
   cursor: pointer;
@@ -546,14 +603,13 @@ button:disabled {
   opacity: 0.25;
 }
 
-span#rand-one {
-  transform: scaleX(-1);
-}
 #start-help {
-  position: fixed;
+  position: relative;
   outline: 2000px solid black;
   margin: 0 auto;
   top: 12vh;
+  max-width: 1000px;
+  left: 0;
 }
 
 .displacement {

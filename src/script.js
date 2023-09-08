@@ -113,52 +113,50 @@ function draw() {
   }
 }
 
-setTimeout(() => {
-  for (let i = 1; i < 4; i++) {
-    const holdme = document.getElementById(`holder${i}`);
-    main(holdme);
-    main(holdme);
-    main(holdme);
-  }
+function cloneCanvas(oldCanvas) {
+  //create a new canvas
+  var newCanvas = document.createElement("canvas");
+  var context = newCanvas.getContext("2d");
 
-  function cloneCanvas(oldCanvas) {
-    //create a new canvas
-    var newCanvas = document.createElement("canvas");
-    var context = newCanvas.getContext("2d");
+  //set dimensions
+  newCanvas.width = oldCanvas.width;
+  newCanvas.height = oldCanvas.height;
 
-    //set dimensions
-    newCanvas.width = oldCanvas.width;
-    newCanvas.height = oldCanvas.height;
+  //apply the old canvas to the new one
+  context.drawImage(oldCanvas, 0, 0);
 
-    //apply the old canvas to the new one
-    context.drawImage(oldCanvas, 0, 0);
+  //return the new canvas
+  return newCanvas;
+}
 
-    //return the new canvas
-    return newCanvas;
-  }
+/* windows */
+for (let i = 1; i < 4; i++) {
+  const holdme = document.getElementById(`holder${i}`);
+  main(holdme);
+  main(holdme);
+  main(holdme);
+}
 
-  /* Rosetta window */
-  const holder = document.getElementById("holder");
-  const panes = document.getElementsByClassName("glass");
-  const central = document.getElementById("central");
-  central.style.backgroundImage = `url(${panes[6].toDataURL()})`;
+/* Rosetta window */
+const holder = document.getElementById("holder");
+const panes = document.getElementsByClassName("glass");
+const central = document.getElementById("central");
+central.style.backgroundImage = `url(${panes[6].toDataURL()})`;
 
-  emojis.slice(0, 10).forEach((month, i) => {
-    if (i == 1) return;
-    const hh = div();
-    const size = "188px";
-    hh.classList.add("circle");
-    hh.style.transform = `translate(
+[...new Array(10)].forEach((u, i) => {
+  if (i == 1) return;
+  const hh = div();
+  const size = "188px";
+  hh.classList.add("circle");
+  hh.style.transform = `translate(
     calc(cos(${55 + 36 * i}deg) * ${size}), 
     calc(sin(${55 + 36 * i}deg) * ${size})
   )`;
-    hh.style.filter = `contrast(0.8) brightness(1.2)`;
+  hh.style.filter = `contrast(0.8) brightness(1.2)`;
 
-    hh.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
-    const text = div();
-    text.innerText = month;
-    hh.appendChild(text);
+  hh.style.backgroundImage = `url(${panes[i % panes.length].toDataURL()})`;
+  const text = div();
+  hh.appendChild(text);
 
-    holder.appendChild(hh);
-  });
-}, 0);
+  holder.appendChild(hh);
+});
