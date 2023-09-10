@@ -20,6 +20,9 @@ function main(holder) {
   const bord = div();
   const crest = div({ class: "crest" });
   const cover = div({ class: "cover" });
+  cover.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filter'%3E%3CfeTurbulence seed='${~~(
+    Math.random() * 1000
+  )}' baseFrequency='.006 .2' numOctaves='2'/%3E%3CfeDiffuseLighting surfaceScale='3' lighting-color='%234e3c2f'%3E%3CfeDistantLight elevation='110' /%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filter)'/%3E%3C/svg%3E")`;
 
   bord.onclick = () => {
     crest.innerText = captured.shift();
