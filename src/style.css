@@ -55,8 +55,15 @@ p {
 #viewport {
   position: absolute;
   transform-origin: left top;
-  transition: all 1.8s ease-in-out;
   transform-style: preserve-3d;
+}
+
+.playing #viewport {
+  transition: all 1.8s ease-in-out;
+}
+
+.playing .slide {
+  transition: all 1s ease-in-out 1s;
 }
 
 .slide {
@@ -64,7 +71,6 @@ p {
   position: absolute;
   width: 1200px;
   height: 900px;
-  transition: all 1s ease-in-out 1s;
   pointer-events: none;
   opacity: 0;
 }
@@ -107,7 +113,7 @@ p {
   top: -52px;
   transform: scale(0.92);
 }
-.bord.open,
+.bord.open .light,
 #central {
   filter: url(#light);
   pointer-events: none;
@@ -542,7 +548,7 @@ div.help {
 #war {
   font-size: 35px;
   padding: 0.5em 1.4em;
-  margin: 1.5em auto 0.5em;
+  margin: 1.5em auto 1em;
   background: #931616;
   color: #cdbfb4;
   cursor: pointer;

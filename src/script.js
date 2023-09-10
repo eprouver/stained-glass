@@ -18,6 +18,7 @@ const colors = [
 
 function main(holder) {
   const bord = div();
+  const bhold = div({ class: "light" });
   const crest = div({ class: "crest" });
   const cover = div({ class: "cover" });
   cover.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filter'%3E%3CfeTurbulence seed='${~~(
@@ -89,8 +90,9 @@ function main(holder) {
   }
 
   draw();
-  bord.appendChild(c);
-  bord.appendChild(crest);
+  bhold.appendChild(c);
+  bhold.appendChild(crest);
+  bord.appendChild(bhold);
   bord.appendChild(cover);
   holder.appendChild(bord);
 }

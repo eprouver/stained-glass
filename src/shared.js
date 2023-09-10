@@ -457,7 +457,7 @@ const win = () => {
   zzfx(...[0.7, 0, 400, 0.1, 3, 0.2, , 3.5, , , , , , , , , , 0.72, 0.12, 0.5]);
 
   let highs = [...document.getElementsByClassName("circle")]
-    .concat([...document.getElementsByClassName("bord")])
+    .concat([...document.getElementsByClassName("light")])
     .concat([document.getElementById("central")]);
 
   setTimeout(() => {

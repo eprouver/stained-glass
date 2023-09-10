@@ -188,6 +188,7 @@ setTimeout(() => {
   const go = document.getElementById("go");
   go.addEventListener("click", () => {
     document.getElementById("start-help").style.display = "none";
+    container.classList.add("playing");
     toggleMusic();
     nextSlide("middle");
   });
